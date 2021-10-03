@@ -27,8 +27,8 @@ namespace NYTimes.NET.Clients
         }
 
         /// <inheritdoc />
-        public GlobalConfiguration(IDictionary<string, string> defaultHeader, IDictionary<string, string> apiKey, string basePath) 
-            : base(defaultHeader, apiKey, basePath)
+        public GlobalConfiguration(IDictionary<string, string> defaultHeader, IDictionary<string, string> apiKey, IDictionary<string, string> apiKeyPrefix, string basePath) 
+            : base(defaultHeader, apiKey, apiKeyPrefix, basePath)
         {
         }
 

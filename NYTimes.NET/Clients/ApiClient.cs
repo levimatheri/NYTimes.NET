@@ -117,7 +117,7 @@ namespace NYTimes.NET.Clients
         private RestRequest NewRequest(
             HttpMethod method,
             string path,
-            RequestOptions options,
+            IRequestOptions options,
             IReadableConfiguration configuration)
         {
             if (path == null) throw new ArgumentNullException(nameof(path));
@@ -377,7 +377,7 @@ namespace NYTimes.NET.Clients
             return result;
         }
 
-        private async Task<ApiResponse<T>> ExecAsync<T>(RestRequest req, IReadableConfiguration configuration, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        private async Task<ApiResponse<T>> ExecAsync<T>(RestRequest req, IReadableConfiguration configuration, System.Threading.CancellationToken cancellationToken = default)
         {
             RestClient client = new RestClient(_baseUrl);
 
@@ -494,7 +494,7 @@ namespace NYTimes.NET.Clients
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public Task<ApiResponse<T>> GetAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public Task<ApiResponse<T>> GetAsync<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return ExecAsync<T>(NewRequest(HttpMethod.Get, path, options, config), config, cancellationToken);
@@ -509,7 +509,7 @@ namespace NYTimes.NET.Clients
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public Task<ApiResponse<T>> PostAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public Task<ApiResponse<T>> PostAsync<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return ExecAsync<T>(NewRequest(HttpMethod.Post, path, options, config), config, cancellationToken);
@@ -524,7 +524,7 @@ namespace NYTimes.NET.Clients
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public Task<ApiResponse<T>> PutAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public Task<ApiResponse<T>> PutAsync<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return ExecAsync<T>(NewRequest(HttpMethod.Put, path, options, config), config, cancellationToken);
@@ -539,7 +539,7 @@ namespace NYTimes.NET.Clients
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public Task<ApiResponse<T>> DeleteAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public Task<ApiResponse<T>> DeleteAsync<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return ExecAsync<T>(NewRequest(HttpMethod.Delete, path, options, config), config, cancellationToken);
@@ -554,7 +554,7 @@ namespace NYTimes.NET.Clients
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public Task<ApiResponse<T>> HeadAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public Task<ApiResponse<T>> HeadAsync<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return ExecAsync<T>(NewRequest(HttpMethod.Head, path, options, config), config, cancellationToken);
@@ -569,7 +569,7 @@ namespace NYTimes.NET.Clients
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public Task<ApiResponse<T>> OptionsAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public Task<ApiResponse<T>> OptionsAsync<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return ExecAsync<T>(NewRequest(HttpMethod.Options, path, options, config), config, cancellationToken);
@@ -584,7 +584,7 @@ namespace NYTimes.NET.Clients
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public Task<ApiResponse<T>> PatchAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public Task<ApiResponse<T>> PatchAsync<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return ExecAsync<T>(NewRequest(HttpMethod.Patch, path, options, config), config, cancellationToken);
@@ -600,7 +600,7 @@ namespace NYTimes.NET.Clients
         /// <param name="configuration">A per-request configuration object. It is assumed that any merge with
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public ApiResponse<T> Get<T>(string path, RequestOptions options, IReadableConfiguration configuration = null)
+        public ApiResponse<T> Get<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null)
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return Exec<T>(NewRequest(HttpMethod.Get, path, options, config), config);
@@ -614,7 +614,7 @@ namespace NYTimes.NET.Clients
         /// <param name="configuration">A per-request configuration object. It is assumed that any merge with
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public ApiResponse<T> Post<T>(string path, RequestOptions options, IReadableConfiguration configuration = null)
+        public ApiResponse<T> Post<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null)
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return Exec<T>(NewRequest(HttpMethod.Post, path, options, config), config);
@@ -628,7 +628,7 @@ namespace NYTimes.NET.Clients
         /// <param name="configuration">A per-request configuration object. It is assumed that any merge with
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public ApiResponse<T> Put<T>(string path, RequestOptions options, IReadableConfiguration configuration = null)
+        public ApiResponse<T> Put<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null)
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return Exec<T>(NewRequest(HttpMethod.Put, path, options, config), config);
@@ -642,7 +642,7 @@ namespace NYTimes.NET.Clients
         /// <param name="configuration">A per-request configuration object. It is assumed that any merge with
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public ApiResponse<T> Delete<T>(string path, RequestOptions options, IReadableConfiguration configuration = null)
+        public ApiResponse<T> Delete<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null)
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return Exec<T>(NewRequest(HttpMethod.Delete, path, options, config), config);
@@ -656,7 +656,7 @@ namespace NYTimes.NET.Clients
         /// <param name="configuration">A per-request configuration object. It is assumed that any merge with
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public ApiResponse<T> Head<T>(string path, RequestOptions options, IReadableConfiguration configuration = null)
+        public ApiResponse<T> Head<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null)
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return Exec<T>(NewRequest(HttpMethod.Head, path, options, config), config);
@@ -670,7 +670,7 @@ namespace NYTimes.NET.Clients
         /// <param name="configuration">A per-request configuration object. It is assumed that any merge with
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public ApiResponse<T> Options<T>(string path, RequestOptions options, IReadableConfiguration configuration = null)
+        public ApiResponse<T> Options<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null)
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return Exec<T>(NewRequest(HttpMethod.Options, path, options, config), config);
@@ -684,7 +684,7 @@ namespace NYTimes.NET.Clients
         /// <param name="configuration">A per-request configuration object. It is assumed that any merge with
         /// GlobalConfiguration has been done before calling this method.</param>
         /// <returns>A Task containing ApiResponse</returns>
-        public ApiResponse<T> Patch<T>(string path, RequestOptions options, IReadableConfiguration configuration = null)
+        public ApiResponse<T> Patch<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null)
         {
             var config = configuration ?? GlobalConfiguration.Instance;
             return Exec<T>(NewRequest(HttpMethod.Patch, path, options, config), config);

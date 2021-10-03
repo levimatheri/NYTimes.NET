@@ -18,7 +18,7 @@ namespace NYTimes.NET.Clients
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <typeparam name="T">The return type.</typeparam>
         /// <returns>A task eventually representing the response data, decorated with <see cref="ApiResponse{T}"/></returns>
-        Task<ApiResponse<T>> GetAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null, 
+        Task<ApiResponse<T>> GetAsync<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null, 
             System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace NYTimes.NET.Clients
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <typeparam name="T">The return type.</typeparam>
         /// <returns>A task eventually representing the response data, decorated with <see cref="ApiResponse{T}"/></returns>
-        Task<ApiResponse<T>> PostAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null,
+        Task<ApiResponse<T>> PostAsync<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null,
             System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace NYTimes.NET.Clients
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <typeparam name="T">The return type.</typeparam>
         /// <returns>A task eventually representing the response data, decorated with <see cref="ApiResponse{T}"/></returns>
-        Task<ApiResponse<T>> PutAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null,
+        Task<ApiResponse<T>> PutAsync<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null,
             System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace NYTimes.NET.Clients
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <typeparam name="T">The return type.</typeparam>
         /// <returns>A task eventually representing the response data, decorated with <see cref="ApiResponse{T}"/></returns>
-        Task<ApiResponse<T>> DeleteAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null,
+        Task<ApiResponse<T>> DeleteAsync<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null,
             System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace NYTimes.NET.Clients
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <typeparam name="T">The return type.</typeparam>
         /// <returns>A task eventually representing the response data, decorated with <see cref="ApiResponse{T}"/></returns>
-        Task<ApiResponse<T>> HeadAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null,
+        Task<ApiResponse<T>> HeadAsync<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null,
             System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace NYTimes.NET.Clients
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <typeparam name="T">The return type.</typeparam>
         /// <returns>A task eventually representing the response data, decorated with <see cref="ApiResponse{T}"/></returns>
-        Task<ApiResponse<T>> OptionsAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null,
+        Task<ApiResponse<T>> OptionsAsync<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null,
             System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace NYTimes.NET.Clients
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <typeparam name="T">The return type.</typeparam>
         /// <returns>A task eventually representing the response data, decorated with <see cref="ApiResponse{T}"/></returns>
-        Task<ApiResponse<T>> PatchAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration = null,
+        Task<ApiResponse<T>> PatchAsync<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null,
             System.Threading.CancellationToken cancellationToken = default);
     }
 }

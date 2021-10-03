@@ -18,7 +18,7 @@ namespace NYTimes.NET.Clients
         /// <param name="configuration">Per-request configurable settings.</param>
         /// <typeparam name="T">The return type.</typeparam>
         /// <returns>The response data, decorated with <see cref="ApiResponse{T}"/></returns>
-        ApiResponse<T> Get<T>(string path, RequestOptions options, IReadableConfiguration configuration = null);
+        ApiResponse<T> Get<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null);
 
         /// <summary>
         /// Executes a blocking call to some <paramref name="path"/> using the POST http verb.
@@ -28,7 +28,7 @@ namespace NYTimes.NET.Clients
         /// <param name="configuration">Per-request configurable settings.</param>
         /// <typeparam name="T">The return type.</typeparam>
         /// <returns>The response data, decorated with <see cref="ApiResponse{T}"/></returns>
-        ApiResponse<T> Post<T>(string path, RequestOptions options, IReadableConfiguration configuration = null);
+        ApiResponse<T> Post<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null);
 
         /// <summary>
         /// Executes a blocking call to some <paramref name="path"/> using the PUT http verb.
@@ -38,7 +38,7 @@ namespace NYTimes.NET.Clients
         /// <param name="configuration">Per-request configurable settings.</param>
         /// <typeparam name="T">The return type.</typeparam>
         /// <returns>The response data, decorated with <see cref="ApiResponse{T}"/></returns>
-        ApiResponse<T> Put<T>(string path, RequestOptions options, IReadableConfiguration configuration = null);
+        ApiResponse<T> Put<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null);
 
         /// <summary>
         /// Executes a blocking call to some <paramref name="path"/> using the DELETE http verb.
@@ -48,7 +48,7 @@ namespace NYTimes.NET.Clients
         /// <param name="configuration">Per-request configurable settings.</param>
         /// <typeparam name="T">The return type.</typeparam>
         /// <returns>The response data, decorated with <see cref="ApiResponse{T}"/></returns>
-        ApiResponse<T> Delete<T>(string path, RequestOptions options, IReadableConfiguration configuration = null);
+        ApiResponse<T> Delete<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null);
 
         /// <summary>
         /// Executes a blocking call to some <paramref name="path"/> using the HEAD http verb.
@@ -58,7 +58,7 @@ namespace NYTimes.NET.Clients
         /// <param name="configuration">Per-request configurable settings.</param>
         /// <typeparam name="T">The return type.</typeparam>
         /// <returns>The response data, decorated with <see cref="ApiResponse{T}"/></returns>
-        ApiResponse<T> Head<T>(string path, RequestOptions options, IReadableConfiguration configuration = null);
+        ApiResponse<T> Head<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null);
 
         /// <summary>
         /// Executes a blocking call to some <paramref name="path"/> using the OPTIONS http verb.
@@ -68,7 +68,7 @@ namespace NYTimes.NET.Clients
         /// <param name="configuration">Per-request configurable settings.</param>
         /// <typeparam name="T">The return type.</typeparam>
         /// <returns>The response data, decorated with <see cref="ApiResponse{T}"/></returns>
-        ApiResponse<T> Options<T>(string path, RequestOptions options, IReadableConfiguration configuration = null);
+        ApiResponse<T> Options<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null);
 
         /// <summary>
         /// Executes a blocking call to some <paramref name="path"/> using the PATCH http verb.
@@ -78,6 +78,6 @@ namespace NYTimes.NET.Clients
         /// <param name="configuration">Per-request configurable settings.</param>
         /// <typeparam name="T">The return type.</typeparam>
         /// <returns>The response data, decorated with <see cref="ApiResponse{T}"/></returns>
-        ApiResponse<T> Patch<T>(string path, RequestOptions options, IReadableConfiguration configuration = null);
+        ApiResponse<T> Patch<T>(string path, IRequestOptions options, IReadableConfiguration configuration = null);
     }
 }

@@ -107,6 +107,7 @@ namespace NYTimes.NET.Clients
         public Configuration(
             IDictionary<string, string> defaultHeaders,
             IDictionary<string, string> apiKey,
+            IDictionary<string, string> apiKeyPrefix,
             string basePath) : this()
         {
             if (string.IsNullOrWhiteSpace(basePath))
@@ -115,6 +116,8 @@ namespace NYTimes.NET.Clients
                 throw new ArgumentNullException(nameof(defaultHeaders));
             if (apiKey == null)
                 throw new ArgumentNullException(nameof(apiKey));
+            if (apiKeyPrefix == null)
+                throw new ArgumentNullException(nameof(apiKeyPrefix));
 
             BasePath = basePath;
 
@@ -126,6 +129,11 @@ namespace NYTimes.NET.Clients
             foreach (var keyValuePair in apiKey)
             {
                 ApiKey.Add(keyValuePair);
+            }
+            
+            foreach (var keyValuePair in apiKeyPrefix)
+            {
+                ApiKeyPrefix.Add(keyValuePair);
             }
         }
 
@@ -147,10 +155,7 @@ namespace NYTimes.NET.Clients
         [Obsolete("Use DefaultHeaders instead.")]
         public virtual IDictionary<string, string> DefaultHeader
         {
-            get
-            {
-                return DefaultHeaders;
-            }
+            get => DefaultHeaders;
             set
             {
                 DefaultHeaders = value;
