@@ -10,7 +10,7 @@ namespace NYTimes.NET
 
         public Api(string apiKey)
         {
-            _configuration.AddApiKey("api-key", apiKey);
+            _configuration.AddApiKey(Constants.ApiKeyPrefix, apiKey);
         }
 
         public ArchiveClient Archives
