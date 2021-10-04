@@ -15,7 +15,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
-namespace NYTimes.NET.Models.Archive
+namespace NYTimes.NET.Models
 {
     /// <summary>
     /// Person

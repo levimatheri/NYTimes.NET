@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace NYTimes.NET.Models.Archive
+namespace NYTimes.NET.Models
 {
     /// <summary>
     ///  Abstract base class for oneOf, anyOf schemas in the OpenAPI specification

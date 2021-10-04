@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using NYTimes.NET.Models.Archive;
+using NYTimes.NET.Models;
 using Polly;
 using RestSharp;
 using RestSharp.Deserializers;
@@ -337,7 +337,7 @@ namespace NYTimes.NET.Clients
                 }
                 catch (Exception ex)
                 {
-                    throw ex.InnerException != null ? ex.InnerException : ex;
+                    throw ex.InnerException ?? ex;
                 }
             }
             else if (typeof(T).Name == "Stream") // for binary response

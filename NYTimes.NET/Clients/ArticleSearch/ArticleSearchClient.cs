@@ -6,20 +6,20 @@ using Newtonsoft.Json.Linq;
 using NYTimes.NET.Models;
 using ApiClientConfiguration = NYTimes.NET.Clients.Configuration;
 
-namespace NYTimes.NET.Clients.Archive
+namespace NYTimes.NET.Clients.ArticleSearch
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class ArchiveClient : IArchiveClient
+    public class ArticleSearchClient : IArticleSearchClient
     {
         private ExceptionFactory _exceptionFactory = (name, response) => null;
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArchiveClient"/> class.
+        /// Initializes a new instance of the <see cref="ArticleSearchClient"/> class.
         /// </summary>
         /// <returns></returns>
-        public ArchiveClient()
+        public ArticleSearchClient()
         {
             this.Configuration = ApiClientConfiguration.MergeConfigurations(
                 GlobalConfiguration.Instance,
@@ -31,43 +31,44 @@ namespace NYTimes.NET.Clients.Archive
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArchiveClient"/> class
+        /// Initializes a new instance of the <see cref="ArticleSearchClient"/> class
         /// using Configuration object
         /// </summary>
         /// <param name="configuration">An instance of <see cref="IReadableConfiguration"/></param>
         /// <returns></returns>
-        public ArchiveClient(IReadableConfiguration configuration)
+        public ArticleSearchClient(IReadableConfiguration configuration)
         {
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            
+
             this.Configuration = ApiClientConfiguration.MergeConfigurations(
                 GlobalConfiguration.Instance,
                 configuration
             );
+            
             this.RequestOptions = new RequestOptions(this.Configuration);
             this.AsynchronousClient = new ApiClient(this.Configuration.BasePath);
             ExceptionFactory = ApiClientConfiguration.DefaultExceptionFactory;
         }
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArchiveClient"/> class
+        /// Initializes a new instance of the <see cref="ArticleSearchClient"/> class
         /// using Configuration object
         /// </summary>
         /// <param name="requestOptions">An implementation of <see cref="IRequestOptions"/></param>
         /// <returns></returns>
-        public ArchiveClient(IRequestOptions requestOptions) : this()
+        public ArticleSearchClient(IRequestOptions requestOptions) : this()
         {
             this.RequestOptions = requestOptions;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArchiveClient"/> class
+        /// Initializes a new instance of the <see cref="ArticleSearchClient"/> class
         /// using a <see cref="IReadableConfiguration"/> instance, a <see cref="IRequestOptions"/> instance and client instance.
         /// </summary>
         /// <param name="asyncClient">The client interface for asynchronous API access.</param>
         /// <param name="requestOptions">The request options object</param>
         /// <param name="configuration">The configuration object.</param>
-        public ArchiveClient(IAsynchronousClient asyncClient,
+        public ArticleSearchClient(IAsynchronousClient asyncClient,
             IRequestOptions requestOptions, IReadableConfiguration configuration)
         {
             this.AsynchronousClient = asyncClient ?? throw new ArgumentNullException(nameof(asyncClient));
@@ -97,24 +98,47 @@ namespace NYTimes.NET.Clients.Archive
         
         public string GetBasePath()
         {
-            return Constants.ArchiveApi.BaseUrl;
+            return Constants.ArticleSearchApi.BaseUrl;
         }
 
         /// <summary>
-        /// Returns an array of articles for a given month. Pass in year and month and get back JSON with all articles for that month. The response can be big (~20 megabytes) and contain thousands of articles, depending on the year and month. 
+        /// Returns an array of articles. Search for NYT articles by keywords, filters and facets.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="year">Year: 1851-2019</param>
-        /// <param name="month">Year: 1-12</param>
+        /// <param name="beginDate">Begin date (e.g. 20120101) (optional)</param>
+        /// <param name="endDate">End date (e.g. 20121231) (optional)</param>
+        /// <param name="facet">Whether to show facet counts (optional)</param>
+        /// <param name="facetFields">Facets (optional)</param>
+        /// <param name="facetFilter">Have facet counts use filters (optional)</param>
+        /// <param name="fl">Field list (optional)</param>
+        /// <param name="fq">Filter query (optional)</param>
+        /// <param name="page">Page number (0, 1, ...) (optional)</param>
+        /// <param name="q">Query (optional)</param>
+        /// <param name="sort">Sort order (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of a readonly list of <see cref="Article"/></returns>
-        public async Task<IReadOnlyList<Article>> GetAllMonthArticles(int year, int month, CancellationToken cancellationToken = default)
+        public async Task<IReadOnlyList<Article>> SearchArticles(string beginDate = default, string endDate = default,
+            string facet = default, string facetFields = default, string facetFilter = default, string fl = default, string fq = default,
+            int? page = default, string q = default, string sort = default, CancellationToken cancellationToken = default)
         {
-            RequestOptions.PathParameters.Add("year", ClientUtils.ParameterToString(year));
-            RequestOptions.PathParameters.Add("month", ClientUtils.ParameterToString(month));
+            var paramDictionary = new Dictionary<string, object>
+            {
+                {"begin_date", beginDate},
+                {"end_date", endDate},
+                {"facet", facet},
+                {"facet_fields", facetFields},
+                {"facet_filter", facetFilter},
+                {"fl", fl},
+                {"fq", fq},
+                {"page", page},
+                {"q", q},
+                {"sort", sort},
+            };
+            
+            AddRequestParams(paramDictionary);
             
             var wrappedResponse = await this.AsynchronousClient
-                .GetAsync<JObject>("/{year}/{month}.json", this.RequestOptions, this.Configuration, cancellationToken)
+                .GetAsync<JObject>("/articlesearch.json", RequestOptions, this.Configuration, cancellationToken)
                 .ConfigureAwait(false);
 
             var articles = wrappedResponse.Data
@@ -122,10 +146,22 @@ namespace NYTimes.NET.Clients.Archive
                 .ToObject<IReadOnlyList<Article>>();
 
             if (this.ExceptionFactory == null) return articles;
-            var exception = this.ExceptionFactory(nameof(GetAllMonthArticles), wrappedResponse);
+            var exception = this.ExceptionFactory(nameof(SearchArticles), wrappedResponse);
             if (exception != null) throw exception;
 
             return articles;
+        }
+
+        private void AddRequestParams(IDictionary<string, object> paramDict)
+        {
+            foreach (var (key, value) in paramDict)
+            {
+                if (value != null)
+                {
+                    RequestOptions.QueryParameters.Add(
+                        ClientUtils.ParameterToMultiMap("", key, value));
+                }
+            }
         }
     }
 }

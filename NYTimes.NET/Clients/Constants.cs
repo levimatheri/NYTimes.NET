@@ -6,5 +6,10 @@
         {
             public const string BaseUrl = "https://api.nytimes.com/svc/archive/v1";
         }
+        
+        public static class ArticleSearchApi
+        {
+            public const string BaseUrl = "https://api.nytimes.com/svc/search/v2";
+        }
     }
 }

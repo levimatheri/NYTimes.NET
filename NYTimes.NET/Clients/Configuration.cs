@@ -41,7 +41,7 @@ namespace NYTimes.NET.Clients
             if (status >= 400)
             {
                 return new ApiException(status,
-                    $"Error calling {methodName}: {response.RawContent}",
+                    $"Error calling {methodName}: {status} {response.RawContent}",
                     response.RawContent, response.Headers);
             }
             return null;

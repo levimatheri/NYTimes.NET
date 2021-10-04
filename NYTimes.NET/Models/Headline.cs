@@ -14,7 +14,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace NYTimes.NET.Models.Archive
+namespace NYTimes.NET.Models
 {
     /// <summary>
     /// Headline

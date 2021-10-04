@@ -10,56 +10,49 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace NYTimes.NET.Models.Archive
+namespace NYTimes.NET.Models
 {
     /// <summary>
-    /// Keyword
+    /// Byline
     /// </summary>
-    [DataContract(Name = "Keyword")]
-    public class Keyword : IEquatable<Keyword>, IValidatableObject
+    [DataContract(Name = "Byline")]
+    public class Byline : IEquatable<Byline>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Keyword" /> class.
+        /// Initializes a new instance of the <see cref="Byline" /> class.
         /// </summary>
-        /// <param name="name">name.</param>
-        /// <param name="value">value.</param>
-        /// <param name="rank">rank.</param>
-        /// <param name="major">major.</param>
-        public Keyword(string name = default(string), string value = default(string), int rank = default(int), string major = default(string))
+        /// <param name="original">original.</param>
+        /// <param name="person">person.</param>
+        /// <param name="organization">organization.</param>
+        public Byline(string original = default, List<Person> person = default, string organization = default)
         {
-            this.Name = name;
-            this.Value = value;
-            this.Rank = rank;
-            this.Major = major;
+            this.Original = original;
+            this.Person = person;
+            this.Organization = organization;
         }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// Gets or Sets Original
         /// </summary>
-        [DataMember(Name = "name", EmitDefaultValue = false)]
-        public string Name { get; }
+        [DataMember(Name = "original", EmitDefaultValue = false)]
+        public string Original { get; }
 
         /// <summary>
-        /// Gets or Sets Value
+        /// Gets or Sets Person
         /// </summary>
-        [DataMember(Name = "value", EmitDefaultValue = false)]
-        public string Value { get; }
+        [DataMember(Name = "person", EmitDefaultValue = false)]
+        public List<Person> Person { get; }
 
         /// <summary>
-        /// Gets or Sets Rank
+        /// Gets or Sets Organization
         /// </summary>
-        [DataMember(Name = "rank", EmitDefaultValue = false)]
-        public int Rank { get; }
-
-        /// <summary>
-        /// Gets or Sets Major
-        /// </summary>
-        [DataMember(Name = "major", EmitDefaultValue = false)]
-        public string Major { get; }
+        [DataMember(Name = "organization", EmitDefaultValue = false)]
+        public string Organization { get; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -68,11 +61,10 @@ namespace NYTimes.NET.Models.Archive
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Keyword {\n");
-            sb.Append("  Name: ").Append(Name).Append('\n');
-            sb.Append("  Value: ").Append(Value).Append('\n');
-            sb.Append("  Rank: ").Append(Rank).Append('\n');
-            sb.Append("  Major: ").Append(Major).Append('\n');
+            sb.Append("class Byline {\n");
+            sb.Append("  Original: ").Append(Original).Append('\n');
+            sb.Append("  Person: ").Append(Person).Append('\n');
+            sb.Append("  Organization: ").Append(Organization).Append('\n');
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -93,38 +85,35 @@ namespace NYTimes.NET.Models.Archive
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Keyword);
+            return this.Equals(input as Byline);
         }
 
         /// <summary>
-        /// Returns true if Keyword instances are equal
+        /// Returns true if Byline instances are equal
         /// </summary>
-        /// <param name="input">Instance of Keyword to be compared</param>
+        /// <param name="input">Instance of Byline to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Keyword input)
+        public bool Equals(Byline input)
         {
             if (input == null)
                 return false;
 
             return 
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    this.Original == input.Original ||
+                    (this.Original != null &&
+                    this.Original.Equals(input.Original))
                 ) && 
                 (
-                    this.Value == input.Value ||
-                    (this.Value != null &&
-                    this.Value.Equals(input.Value))
+                    this.Person == input.Person ||
+                    this.Person != null &&
+                    input.Person != null &&
+                    this.Person.SequenceEqual(input.Person)
                 ) && 
                 (
-                    this.Rank == input.Rank ||
-                    this.Rank.Equals(input.Rank)
-                ) && 
-                (
-                    this.Major == input.Major ||
-                    (this.Major != null &&
-                    this.Major.Equals(input.Major))
+                    this.Organization == input.Organization ||
+                    (this.Organization != null &&
+                    this.Organization.Equals(input.Organization))
                 );
         }
 
@@ -137,13 +126,12 @@ namespace NYTimes.NET.Models.Archive
             unchecked // Overflow is fine, just wrap
             {
                 var hashCode = 41;
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Value != null)
-                    hashCode = hashCode * 59 + this.Value.GetHashCode();
-                hashCode = hashCode * 59 + this.Rank.GetHashCode();
-                if (this.Major != null)
-                    hashCode = hashCode * 59 + this.Major.GetHashCode();
+                if (this.Original != null)
+                    hashCode = hashCode * 59 + this.Original.GetHashCode();
+                if (this.Person != null)
+                    hashCode = hashCode * 59 + this.Person.GetHashCode();
+                if (this.Organization != null)
+                    hashCode = hashCode * 59 + this.Organization.GetHashCode();
                 return hashCode;
             }
         }

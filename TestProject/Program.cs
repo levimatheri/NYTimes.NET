@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using NYTimes.NET;
+using NYTimes.NET.Clients;
 
 namespace TestProject
 {
@@ -8,11 +10,18 @@ namespace TestProject
     {
         static async Task Main(string[] args)
         {
-            var articles = await new API("apiKey")
-                .Archives.GetAllMonthArticles(2019, 1);
-            foreach (var item in articles)
+            try
             {
-                Console.WriteLine(item.ToJson());
+                var articlesList = await new Api("BEEWoNIsn2C6RB0AXSSDUlzQd8qgvG66")
+                    .ArticleSearch.SearchArticles(q: "elections");
+                foreach (var item in articlesList)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+            catch (ApiException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
     }

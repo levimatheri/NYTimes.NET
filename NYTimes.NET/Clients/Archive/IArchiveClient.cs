@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using NYTimes.NET.Models.Archive;
+using NYTimes.NET.Models;
 
 namespace NYTimes.NET.Clients.Archive
 {
@@ -22,7 +22,7 @@ namespace NYTimes.NET.Clients.Archive
         /// <param name="year">Year: 1851-2019</param>
         /// <param name="month">Year: 1-12</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of InlineResponse200</returns>
+        /// <returns>Task of a readonly list of <see cref="Article"/></returns>
         Task<IReadOnlyList<Article>> GetAllMonthArticles(int year, int month, System.Threading.CancellationToken cancellationToken = default);
     }
 }
