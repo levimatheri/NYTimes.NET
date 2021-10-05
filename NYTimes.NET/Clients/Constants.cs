@@ -12,5 +12,10 @@
         {
             public const string BaseUrl = "https://api.nytimes.com/svc/search/v2";
         }
+        
+        public static class BooksApi
+        {
+            public const string BaseUrl = "https://api.nytimes.com/svc/books/v3";
+        }
     }
 }

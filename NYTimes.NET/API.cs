@@ -1,6 +1,7 @@
 ﻿using NYTimes.NET.Clients;
 using NYTimes.NET.Clients.Archive;
 using NYTimes.NET.Clients.ArticleSearch;
+using NYTimes.NET.Clients.Books;
 
 namespace NYTimes.NET
 {
@@ -28,6 +29,15 @@ namespace NYTimes.NET
             {
                 _configuration.BasePath = Constants.ArticleSearchApi.BaseUrl;
                 return new ArticleSearchClient(_configuration);
+            }
+        }
+        
+        public BooksClient Books
+        {
+            get
+            {
+                _configuration.BasePath = Constants.BooksApi.BaseUrl;
+                return new BooksClient(_configuration);
             }
         }
     }

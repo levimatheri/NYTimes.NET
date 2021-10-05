@@ -6,10 +6,10 @@ using NYTimes.NET.Models;
 namespace NYTimes.NET.Clients.ArticleSearch
 {
     /// <summary>
-    /// A client for The Archive API.
+    /// A client for The Article Search API.
     /// </summary>
     /// <remarks>
-    /// See the <a href="https://developer.nytimes.com/docs/archive-product/1/overview">Archive API documentation</a> for more information.
+    /// See the <a href="https://developer.nytimes.com/docs/articlesearch-product/1/overview">Article Search API documentation</a> for more information.
     /// </remarks>
     public interface IArticleSearchClient : IApiAccessor
     {

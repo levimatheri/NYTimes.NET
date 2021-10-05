@@ -20,7 +20,7 @@ namespace NYTimes.NET.Models
     /// <summary>
     /// Article
     /// </summary>
-    [DataContract(Name = "Article")]
+    [DataContract(Name = "docs")]
     public class Article : IEquatable<Article>, IValidatableObject
     {
         /// <summary>
