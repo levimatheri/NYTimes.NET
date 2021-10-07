@@ -167,6 +167,38 @@ namespace NYTimes.NET.Clients.Books
             return bestSellerListNames;
         }
 
+        /// <summary>
+        /// Get top 5 books for all the Best Sellers lists for specified date.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="publishedDate">YYYY-MM-DD  The best-seller list publication date. You do not have to specify the exact date the list was published.
+        /// The service will search forward (into the future) for the closest publication date to the date you specify.
+        /// For example, a request for lists/overview/2013-05-22 will retrieve the list that was published on 05-26.
+        /// If you do not include a published date, the current week&#39;s best sellers lists will be returned. (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of <see cref="BestSellerOverview"/></returns>
+        public async Task<BestSellerOverview> GetBestSellerOverview(string publishedDate = default, CancellationToken cancellationToken = default)
+        {
+            if (publishedDate != null)
+            {
+                RequestOptions.QueryParameters.Add(ClientUtils.ParameterToMultiMap("", "published_date", publishedDate));
+            }
+            
+            // make the HTTP request
+            var wrappedResponse = await this.AsynchronousClient.GetAsync<JObject>(
+                    "/lists/overview.json", RequestOptions, this.Configuration, cancellationToken)
+                .ConfigureAwait(false);
+            
+            var bestSellerOverview = wrappedResponse.Data
+                .SelectToken("results")?
+                .ToObject<BestSellerOverview>();
+
+            var exception = ExceptionFactory?.Invoke(nameof(GetBestSellerOverview), wrappedResponse);
+            if (exception != null) throw exception;
+
+            return bestSellerOverview;
+        }
+
         private void AddRequestParams(IDictionary<string, object> paramDict)
         {
             foreach (var (key, value) in paramDict)
