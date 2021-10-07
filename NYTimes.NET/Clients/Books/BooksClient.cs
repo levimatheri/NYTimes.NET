@@ -198,6 +198,41 @@ namespace NYTimes.NET.Clients.Books
 
             return bestSellerOverview;
         }
+        
+        /// <summary>
+        /// Get book reviews.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="isbn">Searching by ISBN is the recommended method. You can enter 10- or 13-digit ISBNs. (optional)</param>
+        /// <param name="title">You’ll need to enter the full title of the book. Spaces in the title will be converted into the characters %20. (optional)</param>
+        /// <param name="author">You’ll need to enter the author’s first and last name, separated by a space. This space will be converted into the characters %20. (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of list of <see cref="BookReview"/></returns>
+        public async Task<IReadOnlyList<BookReview>> GetBookReviews(long? isbn = default, string title = default, string author = default, CancellationToken cancellationToken = default)
+        {
+            var paramDictionary = new Dictionary<string, object>
+            {
+                {"isbn", isbn},
+                {"title", title},
+                {"author", author},
+            };
+            
+            AddRequestParams(paramDictionary);
+            
+            // make the HTTP request
+            var wrappedResponse = await this.AsynchronousClient.GetAsync<JObject>(
+                    "/reviews.json", RequestOptions, this.Configuration, cancellationToken)
+                .ConfigureAwait(false);
+            
+            var bestSellerOverview = wrappedResponse.Data
+                .SelectToken("results")?
+                .ToObject<IReadOnlyList<BookReview>>();
+
+            var exception = ExceptionFactory?.Invoke(nameof(GetBookReviews), wrappedResponse);
+            if (exception != null) throw exception;
+
+            return bestSellerOverview;
+        }
 
         private void AddRequestParams(IDictionary<string, object> paramDict)
         {

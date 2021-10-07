@@ -35,5 +35,28 @@ namespace NYTimes.NET.Clients.Books
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of list of <see cref="BestSellerListName"/></returns>
         Task<IReadOnlyList<BestSellerListName>> GetBestSellerListNames(CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Get top 5 books for all the Best Sellers lists for specified date.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="publishedDate">YYYY-MM-DD  The best-seller list publication date. You do not have to specify the exact date the list was published.
+        /// The service will search forward (into the future) for the closest publication date to the date you specify.
+        /// For example, a request for lists/overview/2013-05-22 will retrieve the list that was published on 05-26.
+        /// If you do not include a published date, the current week&#39;s best sellers lists will be returned. (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of <see cref="BestSellerOverview"/></returns>
+        Task<BestSellerOverview> GetBestSellerOverview(string publishedDate = default, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get book reviews.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="isbn">Searching by ISBN is the recommended method. You can enter 10- or 13-digit ISBNs. (optional)</param>
+        /// <param name="title">You’ll need to enter the full title of the book. Spaces in the title will be converted into the characters %20. (optional)</param>
+        /// <param name="author">You’ll need to enter the author’s first and last name, separated by a space. This space will be converted into the characters %20. (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of list of <see cref="BookReview"/></returns>
+        Task<IReadOnlyList<BookReview>> GetBookReviews(long? isbn = default, string title = default, string author = default, CancellationToken cancellationToken = default);
     }
 }
