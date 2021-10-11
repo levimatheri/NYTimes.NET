@@ -58,5 +58,15 @@ namespace NYTimes.NET.Clients.Books
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of list of <see cref="BookReview"/></returns>
         Task<IReadOnlyList<BookReview>> GetBookReviews(long? isbn = default, string title = default, string author = default, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get Best Sellers list by date.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="date">YYYY-MM-DD or \&quot;current\&quot;  The date the best sellers list was published on NYTimes.com.  Use \&quot;current\&quot; to get latest list.</param>
+        /// <param name="list">Name of the Best Sellers List (e.g. hardcover-fiction). You can get the full list of names from the /lists/names.json service.</param>
+        /// <param name="offset">Sets the starting point of the result set (0, 20, ...).  Used to paginate thru books if list has more than 20. Defaults to 0.  The num_results field indicates how many books are in the list. (optional)</param>
+        /// <returns>ApiResponse of InlineResponse2001</returns>
+        Task<BestSellerOverview> GetBestSellersListByDate(string date, string list, int? offset = default, CancellationToken cancellationToken = default);
     }
 }

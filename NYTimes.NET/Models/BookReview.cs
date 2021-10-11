@@ -81,13 +81,13 @@ namespace NYTimes.NET.Models
         {
             var sb = new StringBuilder();
             sb.Append("class BookReview {\n");
-            sb.Append("  Url: ").Append(Url).Append("\n");
-            sb.Append("  PublicationDt: ").Append(PublicationDt).Append("\n");
-            sb.Append("  Byline: ").Append(Byline).Append("\n");
-            sb.Append("  BookTitle: ").Append(BookTitle).Append("\n");
-            sb.Append("  BookAuthor: ").Append(BookAuthor).Append("\n");
-            sb.Append("  Summary: ").Append(Summary).Append("\n");
-            sb.Append("  Isbn13: ").Append(Isbn13).Append("\n");
+            sb.Append("  Url: ").Append(Url).Append('\n');
+            sb.Append("  PublicationDt: ").Append(PublicationDt).Append('\n');
+            sb.Append("  Byline: ").Append(Byline).Append('\n');
+            sb.Append("  BookTitle: ").Append(BookTitle).Append('\n');
+            sb.Append("  BookAuthor: ").Append(BookAuthor).Append('\n');
+            sb.Append("  Summary: ").Append(Summary).Append('\n');
+            sb.Append("  Isbn13: ").Append(Isbn13).Append('\n');
             sb.Append("}\n");
             return sb.ToString();
         }

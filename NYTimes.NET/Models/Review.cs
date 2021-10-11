@@ -59,10 +59,10 @@ namespace NYTimes.NET.Models
         {
             var sb = new StringBuilder();
             sb.Append("class Reviews {\n");
-            sb.Append("  BookReviewLink: ").Append(BookReviewLink).Append("\n");
-            sb.Append("  FirstChapterLink: ").Append(FirstChapterLink).Append("\n");
-            sb.Append("  SundayReviewLink: ").Append(SundayReviewLink).Append("\n");
-            sb.Append("  ArticleChapterLink: ").Append(ArticleChapterLink).Append("\n");
+            sb.Append("  BookReviewLink: ").Append(BookReviewLink).Append('\n');
+            sb.Append("  FirstChapterLink: ").Append(FirstChapterLink).Append('\n');
+            sb.Append("  SundayReviewLink: ").Append(SundayReviewLink).Append('\n');
+            sb.Append("  ArticleChapterLink: ").Append(ArticleChapterLink).Append('\n');
             sb.Append("}\n");
             return sb.ToString();
         }

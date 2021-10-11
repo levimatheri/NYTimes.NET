@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NYTimes.NET.Models;
 using ApiClientConfiguration = NYTimes.NET.Clients.Configuration;
@@ -233,15 +234,64 @@ namespace NYTimes.NET.Clients.Books
 
             return bestSellerOverview;
         }
+        
+        /// <summary>
+        /// Get Best Sellers list by date.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="date">YYYY-MM-DD or \&quot;current\&quot;  The date the best sellers list was published on NYTimes.com.  Use \&quot;current\&quot; to get latest list.</param>
+        /// <param name="list">Name of the Best Sellers List (e.g. hardcover-fiction). You can get the full list of names from the /lists/names.json service.</param>
+        /// <param name="offset">Sets the starting point of the result set (0, 20, ...).  Used to paginate thru books if list has more than 20. Defaults to 0.  The num_results field indicates how many books are in the list. (optional)</param>
+        /// <returns>ApiResponse of InlineResponse2001</returns>
+        public async Task<BestSellerOverview> GetBestSellersListByDate(string date, string list, int? offset = default, CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'date' is set
+            if (date == null)
+                throw new ApiException((int)HttpStatusCode.BadRequest, $"Missing required parameter 'date' when calling {nameof(GetBestSellersListByDate)}");
 
-        private void AddRequestParams(IDictionary<string, object> paramDict)
+            // verify the required parameter 'list' is set
+            if (list == null)
+                throw new ApiException((int)HttpStatusCode.BadRequest, $"Missing required parameter 'list' when calling {nameof(GetBestSellersListByDate)}");
+
+            var paramDictionary = new Dictionary<string, object>
+            {
+                {"date", date},
+                {"list", list},
+                {"offset", offset},
+            };
+            
+            AddRequestParams(paramDictionary, true);
+
+            var wrappedResponse = await this.AsynchronousClient.GetAsync<JObject>(
+                    "/lists/{date}/{list}.json", RequestOptions, this.Configuration, cancellationToken)
+                .ConfigureAwait(false);
+            
+            var result = wrappedResponse.Data
+                .SelectToken("results")?
+                .ToObject<BestSellerDetail>();
+            
+           //var result = JsonConvert.DeserializeObject<BestSellerOverview>(bestSellerBook, settings);
+                
+
+            var exception = ExceptionFactory?.Invoke(nameof(GetBookReviews), wrappedResponse);
+            if (exception != null) throw exception;
+
+            return result;
+        }
+
+        private void AddRequestParams(IDictionary<string, object> paramDict, bool isPathParameter = false)
         {
             foreach (var (key, value) in paramDict)
             {
-                if (value != null)
+                if (value == null) continue;
+                if (!isPathParameter)
                 {
                     RequestOptions.QueryParameters.Add(
                         ClientUtils.ParameterToMultiMap("", key, value));
+                }
+                else
+                {
+                    RequestOptions.PathParameters.Add(key, value.ToString());
                 }
             }
         }

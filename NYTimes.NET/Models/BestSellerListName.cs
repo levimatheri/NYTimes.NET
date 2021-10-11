@@ -97,12 +97,12 @@ namespace NYTimes.NET.Models
         {
             var sb = new StringBuilder();
             sb.Append("class BestSellerListName {\n");
-            sb.Append("  ListName: ").Append(ListName).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  ListNameEncoded: ").Append(ListNameEncoded).Append("\n");
-            sb.Append("  OldestPublishedDate: ").Append(OldestPublishedDate).Append("\n");
-            sb.Append("  NewestPublishedDate: ").Append(NewestPublishedDate).Append("\n");
-            sb.Append("  Updated: ").Append(Updated).Append("\n");
+            sb.Append("  ListName: ").Append(ListName).Append('\n');
+            sb.Append("  DisplayName: ").Append(DisplayName).Append('\n');
+            sb.Append("  ListNameEncoded: ").Append(ListNameEncoded).Append('\n');
+            sb.Append("  OldestPublishedDate: ").Append(OldestPublishedDate).Append('\n');
+            sb.Append("  NewestPublishedDate: ").Append(NewestPublishedDate).Append('\n');
+            sb.Append("  Updated: ").Append(Updated).Append('\n');
             sb.Append("}\n");
             return sb.ToString();
         }

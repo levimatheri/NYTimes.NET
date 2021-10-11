@@ -107,16 +107,16 @@ namespace NYTimes.NET.Models
         {
             var sb = new StringBuilder();
             sb.Append("class BookDetails {\n");
-            sb.Append("  Title: ").Append(Title).Append("\n");
-            sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  Contributor: ").Append(Contributor).Append("\n");
-            sb.Append("  Author: ").Append(Author).Append("\n");
-            sb.Append("  ContributorNote: ").Append(ContributorNote).Append("\n");
-            sb.Append("  Price: ").Append(Price).Append("\n");
-            sb.Append("  AgeGroup: ").Append(AgeGroup).Append("\n");
-            sb.Append("  Publisher: ").Append(Publisher).Append("\n");
-            sb.Append("  PrimaryIsbn13: ").Append(PrimaryIsbn13).Append("\n");
-            sb.Append("  PrimaryIsbn10: ").Append(PrimaryIsbn10).Append("\n");
+            sb.Append("  Title: ").Append(Title).Append('\n');
+            sb.Append("  Description: ").Append(Description).Append('\n');
+            sb.Append("  Contributor: ").Append(Contributor).Append('\n');
+            sb.Append("  Author: ").Append(Author).Append('\n');
+            sb.Append("  ContributorNote: ").Append(ContributorNote).Append('\n');
+            sb.Append("  Price: ").Append(Price).Append('\n');
+            sb.Append("  AgeGroup: ").Append(AgeGroup).Append('\n');
+            sb.Append("  Publisher: ").Append(Publisher).Append('\n');
+            sb.Append("  PrimaryIsbn13: ").Append(PrimaryIsbn13).Append('\n');
+            sb.Append("  PrimaryIsbn10: ").Append(PrimaryIsbn10).Append('\n');
             sb.Append("}\n");
             return sb.ToString();
         }

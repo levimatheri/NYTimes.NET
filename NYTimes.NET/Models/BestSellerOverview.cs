@@ -48,9 +48,9 @@ namespace NYTimes.NET.Models
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2002Results {\n");
-            sb.Append("  BestsellersDate: ").Append(BestsellersDate).Append("\n");
-            sb.Append("  PublishedDate: ").Append(PublishedDate).Append("\n");
-            sb.Append("  Lists: ").Append(Lists).Append("\n");
+            sb.Append("  BestsellersDate: ").Append(BestsellersDate).Append('\n');
+            sb.Append("  PublishedDate: ").Append(PublishedDate).Append('\n');
+            sb.Append("  Lists: ").Append(Lists).Append('\n');
             sb.Append("}\n");
             return sb.ToString();
         }
