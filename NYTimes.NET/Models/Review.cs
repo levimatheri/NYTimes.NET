@@ -7,9 +7,7 @@ using OpenAPIDateConverter = NYTimes.NET.Clients.OpenAPIDateConverter;
 
 namespace NYTimes.NET.Models
 {
-    /// <summary>
-    /// Reviews
-    /// </summary>
+    [DataContract(Name = "reviews")]
     public class Review : IEquatable<Review>, IValidatableObject
     {
         /// <summary>

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NYTimes.NET.Models;
 using ApiClientConfiguration = NYTimes.NET.Clients.Configuration;
@@ -234,7 +233,7 @@ namespace NYTimes.NET.Clients.Books
 
             return bestSellerOverview;
         }
-        
+
         /// <summary>
         /// Get Best Sellers list by date.
         /// </summary>
@@ -242,6 +241,7 @@ namespace NYTimes.NET.Clients.Books
         /// <param name="date">YYYY-MM-DD or \&quot;current\&quot;  The date the best sellers list was published on NYTimes.com.  Use \&quot;current\&quot; to get latest list.</param>
         /// <param name="list">Name of the Best Sellers List (e.g. hardcover-fiction). You can get the full list of names from the /lists/names.json service.</param>
         /// <param name="offset">Sets the starting point of the result set (0, 20, ...).  Used to paginate thru books if list has more than 20. Defaults to 0.  The num_results field indicates how many books are in the list. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of InlineResponse2001</returns>
         public async Task<BestSellerOverview> GetBestSellersListByDate(string date, string list, int? offset = default, CancellationToken cancellationToken = default)
         {
@@ -270,8 +270,55 @@ namespace NYTimes.NET.Clients.Books
                 .SelectToken("results")?
                 .ToObject<BestSellerDetail>();
             
-           //var result = JsonConvert.DeserializeObject<BestSellerOverview>(bestSellerBook, settings);
-                
+            var exception = ExceptionFactory?.Invoke(nameof(GetBookReviews), wrappedResponse);
+            if (exception != null) throw exception;
+
+            return result;
+        }
+        
+        /// <summary>
+        /// Get Best Sellers list history.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ageGroup">The target age group for the best seller. (optional)</param>
+        /// <param name="author">The author of the best seller. The author field does not include additional contributors (see Data Structure for more details about the author and contributor fields).
+        /// When searching the author field, you can specify any combination of first, middle and last names.  When sort-by is set to author, the results will be sorted by author&#39;s first name. (optional)</param>
+        /// <param name="contributor">The author of the best seller, as well as other contributors such as the illustrator (to search or sort by author name only, use author instead).
+        /// When searching, you can specify any combination of first, middle and last names of any of the contributors.
+        /// When sort-by is set to contributor, the results will be sorted by the first name of the first contributor listed. (optional)</param>
+        /// <param name="isbn">International Standard Book Number, 10 or 13 digits  A best seller may have both 10-digit and 13-digit ISBNs, and may have multiple ISBNs of each type.
+        /// To search on multiple ISBNs, separate the ISBNs with semicolons (example: 9780446579933;0061374229). (optional)</param>
+        /// <param name="offset">Sets the starting point of the result set (0, 20, ...).  Used to paginate thru results if there are more than 20. Defaults to 0.
+        /// The num_results field indicates how many results there are total. (optional)</param>
+        /// <param name="price">The publisher&#39;s list price of the best seller, including decimal point. (optional)</param>
+        /// <param name="publisher">The standardized name of the publisher (optional)</param>
+        /// <param name="title">The title of the best seller  When searching, you can specify a portion of a title or a full title. (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of list of BestSellerHistory </returns>
+        public async Task<IReadOnlyList<BestSellerBook>> GetBestSellersListHistory(string ageGroup = default, string author = default, string contributor = default, 
+            string isbn = default, int? offset = default, string price = default, string publisher = default, string title = default, CancellationToken cancellationToken = default)
+        {
+            var paramDictionary = new Dictionary<string, object>
+            {
+                {"age-group", ageGroup},
+                {"author", author},
+                {"contributor", contributor},
+                {"isbn", isbn},
+                {"offset", offset},
+                {"price", price},
+                {"publisher", publisher},
+                {"title", title}
+            };
+            
+            AddRequestParams(paramDictionary);
+            
+            var wrappedResponse = await this.AsynchronousClient.GetAsync<JObject>(
+                    "/lists/best-sellers/history.json", RequestOptions, this.Configuration, cancellationToken)
+                .ConfigureAwait(false);
+            
+            var result = wrappedResponse.Data
+                .SelectToken("results")?
+                .ToObject<IReadOnlyList<BestSellerHistory>>();
 
             var exception = ExceptionFactory?.Invoke(nameof(GetBookReviews), wrappedResponse);
             if (exception != null) throw exception;

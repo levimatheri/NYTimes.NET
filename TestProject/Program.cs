@@ -13,12 +13,12 @@ namespace TestProject
             try
             {
                 var items = await new Api("")
-                    .Books.GetBestSellersListByDate("2016-01-03", "Trade Fiction Paperback");
-                Console.WriteLine(items.ToJson());
-                // foreach (var item in items)
-                // {
-                //     Console.WriteLine(item.ToJson());
-                // }
+                    .Books.GetBestSellersListHistory(author: "Steve Monroe");
+                //Console.WriteLine(items.ToJson());
+                foreach (var item in items)
+                {
+                    Console.WriteLine(item.ToJson());
+                }
             }
             catch (ApiException ex)
             {

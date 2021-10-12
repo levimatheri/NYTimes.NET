@@ -32,13 +32,15 @@ namespace NYTimes.NET.Models
         /// <param name="sundayReviewLink">sundayReviewLink.</param>
         /// <param name="articleChapterLink">articleChapterLink.</param>
         /// <param name="isbns">isbns.</param>
+        /// <param name="reviews">reviews</param>
         public BestSellerBook(int rank = default, int rankLastWeek = default, int weeksOnList = default, 
             int asterisk = default, int dagger = default, string primaryIsbn10 = default, string primaryIsbn13 = default, 
             string publisher = default, string description = default, decimal price = default, string title = default, string author = default,
             string contributor = default, string contributorNote = default, string bookImage = default, string amazonProductUrl = default,
             string ageGroup = default, string bookReviewLink = default, string firstChapterLink = default, string sundayReviewLink = default,
-            string articleChapterLink = default, List<Isbn> isbns = default)
-            : base(rank: rank, rankLastWeek: rankLastWeek, weeksOnList: weeksOnList, asterisk: asterisk, dagger: dagger, isbns: isbns, amazonProductUrl: amazonProductUrl)
+            string articleChapterLink = default, List<Isbn> isbns = default, List<Review> reviews = default)
+            : base(rank: rank, rankLastWeek: rankLastWeek, weeksOnList: weeksOnList, asterisk: asterisk, dagger: dagger, isbns: isbns, 
+                amazonProductUrl: amazonProductUrl, reviews: reviews)
         {
             this.PrimaryIsbn10 = primaryIsbn10;
             this.PrimaryIsbn13 = primaryIsbn13;
