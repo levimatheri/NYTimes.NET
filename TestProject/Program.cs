@@ -12,7 +12,7 @@ namespace TestProject
         {
             try
             {
-                var items = await new Api("BEEWoNIsn2C6RB0AXSSDUlzQd8qgvG66")
+                var items = await new Api("")
                     .MostPopular.GetMostEmailedArticlesByPeriod(1);
                 //Console.WriteLine(items.ToJson());
                 foreach (var item in items)
