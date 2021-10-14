@@ -19,7 +19,7 @@ namespace NYTimes.NET.Models
     /// <summary>
     /// MultimediaLegacy
     /// </summary>
-    [DataContract(Name = "Multimedia_legacy")]
+    [DataContract(Name = "multimedia_legacy")]
     public partial class MultimediaLegacy : IEquatable<MultimediaLegacy>, IValidatableObject
     {
         /// <summary>

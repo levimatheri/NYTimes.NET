@@ -2,6 +2,7 @@
 using NYTimes.NET.Clients.Archive;
 using NYTimes.NET.Clients.ArticleSearch;
 using NYTimes.NET.Clients.Books;
+using NYTimes.NET.Clients.MostPopular;
 
 namespace NYTimes.NET
 {
@@ -14,7 +15,7 @@ namespace NYTimes.NET
             _configuration.AddApiKey(Constants.ApiKeyPrefix, apiKey);
         }
 
-        public ArchiveClient Archives
+        public IArchiveClient Archives
         {
             get
             {
@@ -23,7 +24,7 @@ namespace NYTimes.NET
             }
         }
 
-        public ArticleSearchClient ArticleSearch
+        public IArticleSearchClient ArticleSearch
         {
             get
             {
@@ -32,12 +33,21 @@ namespace NYTimes.NET
             }
         }
         
-        public BooksClient Books
+        public IBooksClient Books
         {
             get
             {
                 _configuration.BasePath = Constants.BooksApi.BaseUrl;
                 return new BooksClient(_configuration);
+            }
+        }
+
+        public IMostPopularClient MostPopular
+        {
+            get
+            {
+                _configuration.BasePath = Constants.MostPopularApi.BaseUrl;
+                return new MostPopularClient(_configuration);
             }
         }
     }

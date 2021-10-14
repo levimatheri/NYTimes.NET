@@ -12,17 +12,21 @@ namespace TestProject
         {
             try
             {
-                var items = await new Api("")
-                    .Books.GetBestSellersListHistory(author: "Steve Monroe");
+                var items = await new Api("BEEWoNIsn2C6RB0AXSSDUlzQd8qgvG66")
+                    .MostPopular.GetMostEmailedArticlesByPeriod(1);
                 //Console.WriteLine(items.ToJson());
                 foreach (var item in items)
                 {
                     Console.WriteLine(item.ToJson());
                 }
             }
-            catch (ApiException ex)
+            catch (ApiException aex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(aex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
     }

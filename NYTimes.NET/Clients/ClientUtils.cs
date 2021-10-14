@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -216,6 +217,28 @@ namespace NYTimes.NET.Clients
             if (string.IsNullOrWhiteSpace(mime)) return false;
 
             return JsonRegex.IsMatch(mime) || mime.Equals("application/json-patch+json");
+        }
+
+        /// <summary>
+        /// Add request parameters.
+        /// </summary>
+        /// <param name="requestOptions">A <see cref="IRequestOptions"/> instance</param>
+        /// <param name="paramDict">A dictionary of parameters</param>
+        /// <param name="isPathParameter">Whether parameters should be added as part of the path. If set to false, will add parameters as query parameters</param>
+        public static void AddRequestParams(IRequestOptions requestOptions, IDictionary<string, object> paramDict, bool isPathParameter = false)
+        {
+            foreach (var (key, value) in paramDict)
+            {
+                if (value == null) continue;
+                if (!isPathParameter)
+                {
+                    requestOptions.QueryParameters.Add(ParameterToMultiMap("", key, value));
+                }
+                else
+                {
+                    requestOptions.PathParameters.Add(key, value.ToString());
+                }
+            }
         }
     }
 }

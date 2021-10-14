@@ -17,5 +17,10 @@
         {
             public const string BaseUrl = "https://api.nytimes.com/svc/books/v3";
         }
+
+        public static class MostPopularApi
+        {
+            public const string BaseUrl = "https://api.nytimes.com/svc/mostpopular/v2";
+        }
     }
 }

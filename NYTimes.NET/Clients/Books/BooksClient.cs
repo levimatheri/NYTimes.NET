@@ -128,9 +128,9 @@ namespace NYTimes.NET.Clients.Books
                 {"published-date", publishedDate},
                 {"offset", offset}
             };
-            
-            AddRequestParams(paramDictionary);
-            
+
+            ClientUtils.AddRequestParams(RequestOptions, paramDictionary);
+
             var wrappedResponse = await this.AsynchronousClient.GetAsync<JObject>(
                 "/lists.json", RequestOptions, this.Configuration, cancellationToken)
                 .ConfigureAwait(false);
@@ -179,11 +179,13 @@ namespace NYTimes.NET.Clients.Books
         /// <returns>Task of <see cref="BestSellerOverview"/></returns>
         public async Task<BestSellerOverview> GetBestSellerOverview(string publishedDate = default, CancellationToken cancellationToken = default)
         {
-            if (publishedDate != null)
+            var paramDictionary = new Dictionary<string, object>
             {
-                RequestOptions.QueryParameters.Add(ClientUtils.ParameterToMultiMap("", "published_date", publishedDate));
-            }
-            
+                { "published_date", publishedDate }
+            };
+
+            ClientUtils.AddRequestParams(RequestOptions, paramDictionary);
+
             // make the HTTP request
             var wrappedResponse = await this.AsynchronousClient.GetAsync<JObject>(
                     "/lists/overview.json", RequestOptions, this.Configuration, cancellationToken)
@@ -216,9 +218,9 @@ namespace NYTimes.NET.Clients.Books
                 {"title", title},
                 {"author", author},
             };
-            
-            AddRequestParams(paramDictionary);
-            
+
+            ClientUtils.AddRequestParams(RequestOptions, paramDictionary);
+
             // make the HTTP request
             var wrappedResponse = await this.AsynchronousClient.GetAsync<JObject>(
                     "/reviews.json", RequestOptions, this.Configuration, cancellationToken)
@@ -259,8 +261,8 @@ namespace NYTimes.NET.Clients.Books
                 {"list", list},
                 {"offset", offset},
             };
-            
-            AddRequestParams(paramDictionary, true);
+
+            ClientUtils.AddRequestParams(RequestOptions, paramDictionary, true);
 
             var wrappedResponse = await this.AsynchronousClient.GetAsync<JObject>(
                     "/lists/{date}/{list}.json", RequestOptions, this.Configuration, cancellationToken)
@@ -270,7 +272,7 @@ namespace NYTimes.NET.Clients.Books
                 .SelectToken("results")?
                 .ToObject<BestSellerDetail>();
             
-            var exception = ExceptionFactory?.Invoke(nameof(GetBookReviews), wrappedResponse);
+            var exception = ExceptionFactory?.Invoke(nameof(GetBestSellersListByDate), wrappedResponse);
             if (exception != null) throw exception;
 
             return result;
@@ -309,9 +311,9 @@ namespace NYTimes.NET.Clients.Books
                 {"publisher", publisher},
                 {"title", title}
             };
-            
-            AddRequestParams(paramDictionary);
-            
+
+            ClientUtils.AddRequestParams(RequestOptions, paramDictionary);
+
             var wrappedResponse = await this.AsynchronousClient.GetAsync<JObject>(
                     "/lists/best-sellers/history.json", RequestOptions, this.Configuration, cancellationToken)
                 .ConfigureAwait(false);
@@ -320,27 +322,10 @@ namespace NYTimes.NET.Clients.Books
                 .SelectToken("results")?
                 .ToObject<IReadOnlyList<BestSellerHistory>>();
 
-            var exception = ExceptionFactory?.Invoke(nameof(GetBookReviews), wrappedResponse);
+            var exception = ExceptionFactory?.Invoke(nameof(GetBestSellersListHistory), wrappedResponse);
             if (exception != null) throw exception;
 
             return result;
-        }
-
-        private void AddRequestParams(IDictionary<string, object> paramDict, bool isPathParameter = false)
-        {
-            foreach (var (key, value) in paramDict)
-            {
-                if (value == null) continue;
-                if (!isPathParameter)
-                {
-                    RequestOptions.QueryParameters.Add(
-                        ClientUtils.ParameterToMultiMap("", key, value));
-                }
-                else
-                {
-                    RequestOptions.PathParameters.Add(key, value.ToString());
-                }
-            }
         }
     }
 }

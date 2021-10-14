@@ -46,7 +46,7 @@ namespace NYTimes.NET.Clients.Books
         /// If you do not include a published date, the current week&#39;s best sellers lists will be returned. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of <see cref="BestSellerOverview"/></returns>
-        Task<BestSellerOverview> GetBestSellerOverview(string publishedDate = default, CancellationToken cancellationToken = default);
+        Task<BestSellerOverview> GetBestSellerOverview(string publishedDate, CancellationToken cancellationToken);
 
         /// <summary>
         /// Get book reviews.
@@ -57,7 +57,7 @@ namespace NYTimes.NET.Clients.Books
         /// <param name="author">You’ll need to enter the author’s first and last name, separated by a space. This space will be converted into the characters %20. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of list of <see cref="BookReview"/></returns>
-        Task<IReadOnlyList<BookReview>> GetBookReviews(long? isbn = default, string title = default, string author = default, CancellationToken cancellationToken = default);
+        Task<IReadOnlyList<BookReview>> GetBookReviews(long? isbn, string title, string author, CancellationToken cancellationToken);
 
         /// <summary>
         /// Get Best Sellers list by date.
@@ -67,6 +67,28 @@ namespace NYTimes.NET.Clients.Books
         /// <param name="list">Name of the Best Sellers List (e.g. hardcover-fiction). You can get the full list of names from the /lists/names.json service.</param>
         /// <param name="offset">Sets the starting point of the result set (0, 20, ...).  Used to paginate thru books if list has more than 20. Defaults to 0.  The num_results field indicates how many books are in the list. (optional)</param>
         /// <returns>ApiResponse of InlineResponse2001</returns>
-        Task<BestSellerOverview> GetBestSellersListByDate(string date, string list, int? offset = default, CancellationToken cancellationToken = default);
+        Task<BestSellerOverview> GetBestSellersListByDate(string date, string list, int? offset, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Get Best Sellers list history.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ageGroup">The target age group for the best seller. (optional)</param>
+        /// <param name="author">The author of the best seller. The author field does not include additional contributors (see Data Structure for more details about the author and contributor fields).
+        /// When searching the author field, you can specify any combination of first, middle and last names.  When sort-by is set to author, the results will be sorted by author&#39;s first name. (optional)</param>
+        /// <param name="contributor">The author of the best seller, as well as other contributors such as the illustrator (to search or sort by author name only, use author instead).
+        /// When searching, you can specify any combination of first, middle and last names of any of the contributors.
+        /// When sort-by is set to contributor, the results will be sorted by the first name of the first contributor listed. (optional)</param>
+        /// <param name="isbn">International Standard Book Number, 10 or 13 digits  A best seller may have both 10-digit and 13-digit ISBNs, and may have multiple ISBNs of each type.
+        /// To search on multiple ISBNs, separate the ISBNs with semicolons (example: 9780446579933;0061374229). (optional)</param>
+        /// <param name="offset">Sets the starting point of the result set (0, 20, ...).  Used to paginate thru results if there are more than 20. Defaults to 0.
+        /// The num_results field indicates how many results there are total. (optional)</param>
+        /// <param name="price">The publisher&#39;s list price of the best seller, including decimal point. (optional)</param>
+        /// <param name="publisher">The standardized name of the publisher (optional)</param>
+        /// <param name="title">The title of the best seller  When searching, you can specify a portion of a title or a full title. (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of list of BestSellerHistory </returns>
+        Task<IReadOnlyList<BestSellerBook>> GetBestSellersListHistory(string ageGroup, string author, string contributor,
+            string isbn, int? offset, string price, string publisher, string title, CancellationToken cancellationToken);
     }
 }
