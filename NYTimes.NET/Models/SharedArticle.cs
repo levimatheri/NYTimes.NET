@@ -1,15 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NYTimes.NET.Models
 {
     [DataContract(Name = "results")]
-    public class EmailedArticle : Article
+    public class SharedArticle : Article
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EmailedArticle" /> class.
+        /// Initializes a new instance of the <see cref="SharedArticle" /> class.
         /// </summary>
         /// <param name="url">Article&#39;s URL..</param>
         /// <param name="adxKeywords">Semicolon separated list of keywords..</param>
@@ -33,9 +36,9 @@ namespace NYTimes.NET.Models
         /// <param name="geoFacet">Array of geographic facets (e.g. Canada)..</param>
         /// <param name="media">Array of images..</param>
         /// <param name="uri">An article&#39;s globally unique identifier..</param>
-        public EmailedArticle(string url = default, string adxKeywords = default, string subsection = default, string column = default, int etaId = default, string section = default, long id = default, long assetId = default, string nytdsection = default,
-            string byline = default, string type = default, string title = default, string _abstract = default, string publishedDate = default, string source = default, string updated = default, List<string> desFacet = default, List<string> orgFacet = default, 
-            List<string> perFacet = default, List<string> geoFacet = default, List<Media> media = default, string uri = default)
+        public SharedArticle(string url = default, string adxKeywords = default, string subsection = default, string column = default, int etaId = default, string section = default, long id = default, long assetId = default,
+            string nytdsection = default, string byline = default, string type = default, string title = default, string _abstract = default, string publishedDate = default, string source = default, string updated = default, 
+            List<string> desFacet = default, List<string> orgFacet = default, List<string> perFacet = default, List<string> geoFacet = default, List<Media> media = default, string uri = default)
             : base(id: id.ToString(), pubDate: publishedDate, uri: uri, byline: new Byline(original: byline), source: source, webUrl: url)
         {
             this.AdxKeywords = adxKeywords;
@@ -91,7 +94,6 @@ namespace NYTimes.NET.Models
         [DataMember(Name = "section", EmitDefaultValue = false)]
         public string Section { get; set; }
 
-
         /// <summary>
         /// Asset ID number (e.g. 100000007772696).
         /// </summary>
@@ -105,7 +107,6 @@ namespace NYTimes.NET.Models
         /// <value>Article&#39;s section (e.g. sports).</value>
         [DataMember(Name = "nytdsection", EmitDefaultValue = false)]
         public string Nytdsection { get; set; }
-
 
         /// <summary>
         /// Asset type (e.g. Article, Interactive, ...).
@@ -184,7 +185,7 @@ namespace NYTimes.NET.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class EmailedArticle {\n");
+            sb.Append("class SharedArticle {\n");
             sb.Append("  Url: ").Append(WebUrl).Append('\n');
             sb.Append("  AdxKeywords: ").Append(AdxKeywords).Append('\n');
             sb.Append("  Subsection: ").Append(Subsection).Append('\n');
@@ -218,15 +219,15 @@ namespace NYTimes.NET.Models
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as EmailedArticle);
+            return this.Equals(input as SharedArticle);
         }
 
         /// <summary>
-        /// Returns true if EmailedArticle instances are equal
+        /// Returns true if SharedArticle instances are equal
         /// </summary>
-        /// <param name="input">Instance of EmailedArticle to be compared</param>
+        /// <param name="input">Instance of SharedArticle to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(EmailedArticle input)
+        public bool Equals(SharedArticle input)
         {
             if (input == null)
                 return false;

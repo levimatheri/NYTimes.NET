@@ -13,7 +13,7 @@ namespace TestProject
             try
             {
                 var items = await new Api("")
-                    .MostPopular.GetMostEmailedArticlesByPeriod(1);
+                    .MovieReviews.SearchMovieReviews(query: "lebowski");
                 //Console.WriteLine(items.ToJson());
                 foreach (var item in items)
                 {

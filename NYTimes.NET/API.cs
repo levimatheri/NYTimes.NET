@@ -3,6 +3,7 @@ using NYTimes.NET.Clients.Archive;
 using NYTimes.NET.Clients.ArticleSearch;
 using NYTimes.NET.Clients.Books;
 using NYTimes.NET.Clients.MostPopular;
+using NYTimes.NET.Clients.MovieReviews;
 
 namespace NYTimes.NET
 {
@@ -48,6 +49,15 @@ namespace NYTimes.NET
             {
                 _configuration.BasePath = Constants.MostPopularApi.BaseUrl;
                 return new MostPopularClient(_configuration);
+            }
+        }
+
+        public IMovieReviewsClient MovieReviews
+        {
+            get
+            {
+                _configuration.BasePath = Constants.MoviewReviewsApi.BaseUrl;
+                return new MovieReviewsClient(_configuration);
             }
         }
     }

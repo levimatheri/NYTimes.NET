@@ -17,9 +17,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NYTimes.NET.Models
 {
-    /// <summary>
-    /// Article
-    /// </summary>
     [DataContract(Name = "docs")]
     public class Article : IEquatable<Article>, IValidatableObject
     {

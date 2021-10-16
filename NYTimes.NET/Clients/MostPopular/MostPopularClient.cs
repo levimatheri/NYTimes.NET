@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using NYTimes.NET.Models;
+using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using NYTimes.NET.Models;
 using ApiClientConfiguration = NYTimes.NET.Clients.Configuration;
 
 namespace NYTimes.NET.Clients.MostPopular
@@ -123,6 +124,100 @@ namespace NYTimes.NET.Clients.MostPopular
                 .ToObject<IReadOnlyList<EmailedArticle>>();
 
             var exception = ExceptionFactory?.Invoke(nameof(GetMostEmailedArticlesByPeriod), wrappedResponse);
+            if (exception != null) throw exception;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the most shared articles on NYTimes.com for specified period of time (1 day, 7 days, or 30 days). 
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="period">Time period: 1, 7, or 30 days.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of list of Articles</returns>
+        public async Task<IReadOnlyList<Article>> GetMostSharedArticlesByPeriod(int period, CancellationToken cancellationToken = default)
+        {
+            var paramDictionary = new Dictionary<string, object>
+            {
+                { "period", period }
+            };
+
+            ClientUtils.AddRequestParams(RequestOptions, paramDictionary, true);
+
+            var wrappedResponse = await this.AsynchronousClient.GetAsync<JObject>(
+                    "/shared/{period}.json", RequestOptions, this.Configuration, cancellationToken)
+                .ConfigureAwait(false);
+
+            var result = wrappedResponse.Data
+                .SelectToken("results")?
+                .ToObject<IReadOnlyList<SharedArticle>>();
+
+            var exception = ExceptionFactory?.Invoke(nameof(GetMostSharedArticlesByPeriod), wrappedResponse);
+            if (exception != null) throw exception;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the most shared articles by share type on NYTimes.com for specified period of time (1 day, 7 days, or 30 days). 
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// /// <param name="shareType">Share type: facebook.</param>
+        /// <param name="period">Time period: 1, 7, or 30 days.</param>
+        /// <returns>Task of list of Articles</returns>
+        public async Task<IReadOnlyList<Article>> GetMostSharedArticlesByPeriodAndShareType(string shareType, int period, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrWhiteSpace(shareType))
+                throw new ApiException((int)HttpStatusCode.BadRequest, $"Missing required parameter {nameof(shareType)} when calling {nameof(GetMostSharedArticlesByPeriodAndShareType)}");
+
+            var paramDictionary = new Dictionary<string, object>
+            {
+                { "share_type", shareType },
+                { "period", period }
+            };
+
+            ClientUtils.AddRequestParams(RequestOptions, paramDictionary, true);
+
+            var wrappedResponse = await this.AsynchronousClient.GetAsync<JObject>(
+                    "/shared/{period}/{share_type}.json", RequestOptions, this.Configuration, cancellationToken)
+                .ConfigureAwait(false);
+
+            var result = wrappedResponse.Data
+                .SelectToken("results")?
+                .ToObject<IReadOnlyList<SharedArticle>>();
+
+            var exception = ExceptionFactory?.Invoke(nameof(GetMostSharedArticlesByPeriodAndShareType), wrappedResponse);
+            if (exception != null) throw exception;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the most viewed articles on NYTimes.com for specified period of time (1 day, 7 days, or 30 days). 
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="period">Time period: 1, 7, or 30 days.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of list of Articles</returns>
+        public async Task<IReadOnlyList<Article>> GetMostViewedArticlesByPeriod(int period, CancellationToken cancellationToken = default)
+        {
+            var paramDictionary = new Dictionary<string, object>
+            {
+                { "period", period }
+            };
+
+            ClientUtils.AddRequestParams(RequestOptions, paramDictionary, true);
+
+            var wrappedResponse = await this.AsynchronousClient.GetAsync<JObject>(
+                    "/viewed/{period}.json", RequestOptions, this.Configuration, cancellationToken)
+                .ConfigureAwait(false);
+
+            var result = wrappedResponse.Data
+                .SelectToken("results")?
+                .ToObject<IReadOnlyList<SharedArticle>>();
+
+            var exception = ExceptionFactory?.Invoke(nameof(GetMostViewedArticlesByPeriod), wrappedResponse);
             if (exception != null) throw exception;
 
             return result;

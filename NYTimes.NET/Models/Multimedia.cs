@@ -25,9 +25,10 @@ namespace NYTimes.NET.Models
         /// <param name="width">width.</param>
         /// <param name="legacy">legacy.</param>
         /// <param name="cropName">cropName.</param>
+        /// <param name="src">src.</param>
         public Multimedia(int rank = default, string subtype = default, string caption = default, string credit = default,
             string type = default, string url = default, int height = default, int width = default, 
-            MultimediaLegacy legacy = default, string cropName = default)
+            MultimediaLegacy legacy = default, string cropName = default, string src = default)
         {
             this.Rank = rank;
             this.Subtype = subtype;
@@ -39,7 +40,15 @@ namespace NYTimes.NET.Models
             this.Width = width;
             this.Legacy = legacy;
             this.CropName = cropName;
+            this.Src = src;
         }
+
+        /// <summary>
+        /// URL of image.
+        /// </summary>
+        /// <value>URL of image.</value>
+        [DataMember(Name = "src", EmitDefaultValue = false)]
+        public string Src { get; set; }
 
         /// <summary>
         /// Gets or Sets Rank

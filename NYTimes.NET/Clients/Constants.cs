@@ -22,5 +22,10 @@
         {
             public const string BaseUrl = "https://api.nytimes.com/svc/mostpopular/v2";
         }
+
+        public static class MoviewReviewsApi
+        {
+            public const string BaseUrl = "https://api.nytimes.com/svc/movies/v2";
+        }
     }
 }
