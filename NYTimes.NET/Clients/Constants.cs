@@ -23,9 +23,14 @@
             public const string BaseUrl = "https://api.nytimes.com/svc/mostpopular/v2";
         }
 
-        public static class MoviewReviewsApi
+        public static class MovieReviewsApi
         {
             public const string BaseUrl = "https://api.nytimes.com/svc/movies/v2";
+        }
+
+        public static class SemanticApi
+        {
+            public const string BaseUrl = "https://api.nytimes.com/svc/semantic/v2/concept";
         }
     }
 }

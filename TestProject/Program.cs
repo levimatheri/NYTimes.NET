@@ -12,8 +12,8 @@ namespace TestProject
         {
             try
             {
-                var items = await new Api("BEEWoNIsn2C6RB0AXSSDUlzQd8qgvG66")
-                    .MovieReviews.SearchMovieReviews(query: "lebowski");
+                var items = await new Api("")
+                    .Semantics.SearchConcept("evan", fields: "all");
                 //Console.WriteLine(items.ToJson());
                 foreach (var item in items)
                 {

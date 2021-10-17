@@ -4,6 +4,7 @@ using NYTimes.NET.Clients.ArticleSearch;
 using NYTimes.NET.Clients.Books;
 using NYTimes.NET.Clients.MostPopular;
 using NYTimes.NET.Clients.MovieReviews;
+using NYTimes.NET.Clients.Semantic;
 
 namespace NYTimes.NET
 {
@@ -56,8 +57,17 @@ namespace NYTimes.NET
         {
             get
             {
-                _configuration.BasePath = Constants.MoviewReviewsApi.BaseUrl;
+                _configuration.BasePath = Constants.MovieReviewsApi.BaseUrl;
                 return new MovieReviewsClient(_configuration);
+            }
+        }
+
+        public ISemanticClient Semantics
+        {
+            get
+            {
+                _configuration.BasePath = Constants.SemanticApi.BaseUrl;
+                return new SemanticClient(_configuration);
             }
         }
     }

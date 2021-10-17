@@ -96,7 +96,7 @@ namespace NYTimes.NET.Clients.MovieReviews
 
         public string GetBasePath()
         {
-            return Constants.MoviewReviewsApi.BaseUrl;
+            return Constants.MovieReviewsApi.BaseUrl;
         }
 
         /// <summary>
