@@ -4,12 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace NYTimes.NET.Models
 {
     [DataContract(Name = "results")]
-    public class SharedArticle : Article
+    public class SharedArticle : Article, IEquatable<SharedArticle>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SharedArticle" /> class.

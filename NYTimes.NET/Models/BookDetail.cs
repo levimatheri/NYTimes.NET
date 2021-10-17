@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
@@ -8,7 +9,7 @@ namespace NYTimes.NET.Models
     /// <summary>
     /// BookDetails
     /// </summary>
-    public class BookDetail
+    public class BookDetail : IEquatable<BookDetail>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BookDetail" /> class.

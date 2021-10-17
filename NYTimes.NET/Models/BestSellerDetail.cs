@@ -8,7 +8,7 @@ using System.Text;
 namespace NYTimes.NET.Models
 {
     [DataContract(Name = "results")]
-    public class BestSellerDetail : BestSellerOverview
+    public class BestSellerDetail : BestSellerOverview, IEquatable<BestSellerDetail>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BestSellerDetail" /> class.

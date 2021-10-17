@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace NYTimes.NET.Models
 {
     [DataContract(Name = "results")]
-    public class Critic
+    public class Critic : IEquatable<Critic>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Critic" /> class.

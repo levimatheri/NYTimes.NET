@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -10,7 +11,7 @@ namespace NYTimes.NET.Models
     /// Book
     /// </summary>
     [DataContract(Name = "results")]
-    public class Book
+    public class Book : IEquatable<Book>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Book" /> class.

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace NYTimes.NET.Models
 {
     [DataContract(Name = "media")]
-    public class Media
+    public class Media : IEquatable<Media>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Media" /> class.

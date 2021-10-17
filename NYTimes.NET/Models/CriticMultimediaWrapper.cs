@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Text;
 namespace NYTimes.NET.Models
 {
     [DataContract(Name = "multimedia")]
-    public class CriticMultimediaWrapper
+    public class CriticMultimediaWrapper : IEquatable<CriticMultimediaWrapper>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CriticMultimediaWrapper" /> class.

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Text;
 namespace NYTimes.NET.Models
 {
     [DataContract(Name = "results")]
-    public class BestSellerHistory : BestSellerBook
+    public class BestSellerHistory : BestSellerBook, IEquatable<BestSellerHistory>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BestSellerHistory" /> class.

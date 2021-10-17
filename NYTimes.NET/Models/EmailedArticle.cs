@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Text;
 namespace NYTimes.NET.Models
 {
     [DataContract(Name = "results")]
-    public class EmailedArticle : Article
+    public class EmailedArticle : Article, IEquatable<EmailedArticle>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EmailedArticle" /> class.

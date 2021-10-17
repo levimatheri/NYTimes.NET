@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
@@ -6,14 +7,14 @@ using System.Text;
 namespace NYTimes.NET.Models
 {
     [DataContract(Name = "link")]
-    public class Link
+    public class Link : IEquatable<Link>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Link" /> class.
         /// </summary>
-        /// <param name="type">Type of asset linked to. Always article..</param>
-        /// <param name="url">Review URL..</param>
-        /// <param name="suggestedLinkText">Suggested text for link..</param>
+        /// <param name="type">Type of asset linked to. Always article.</param>
+        /// <param name="url">Review URL.</param>
+        /// <param name="suggestedLinkText">Suggested text for link.</param>
         public Link(string type = default, string url = default, string suggestedLinkText = default)
         {
             this.Type = type;

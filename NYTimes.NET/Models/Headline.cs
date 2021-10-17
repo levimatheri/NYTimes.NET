@@ -19,7 +19,7 @@ namespace NYTimes.NET.Models
     /// <summary>
     /// Headline
     /// </summary>
-    [DataContract(Name = "Headline")]
+    [DataContract(Name = "headline")]
     public class Headline : IEquatable<Headline>, IValidatableObject
     {
         /// <summary>

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
-using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = NYTimes.NET.Clients.OpenAPIDateConverter;
 
 namespace NYTimes.NET.Models
 {

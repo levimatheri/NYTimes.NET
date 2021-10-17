@@ -19,7 +19,7 @@ namespace NYTimes.NET.Models
     /// <summary>
     /// Keyword
     /// </summary>
-    [DataContract(Name = "Keyword")]
+    [DataContract(Name = "keyword")]
     public class Keyword : IEquatable<Keyword>, IValidatableObject
     {
         /// <summary>
