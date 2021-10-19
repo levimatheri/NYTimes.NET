@@ -5,6 +5,8 @@ using NYTimes.NET.Clients.Books;
 using NYTimes.NET.Clients.MostPopular;
 using NYTimes.NET.Clients.MovieReviews;
 using NYTimes.NET.Clients.Semantic;
+using NYTimes.NET.Clients.TimesTags;
+using NYTimes.NET.Clients.TopStories;
 
 namespace NYTimes.NET
 {
@@ -68,6 +70,24 @@ namespace NYTimes.NET
             {
                 _configuration.BasePath = Constants.SemanticApi.BaseUrl;
                 return new SemanticClient(_configuration);
+            }
+        }
+
+        public ITimesNewsWireClient TimesNewsWire
+        {
+            get
+            {
+                _configuration.BasePath = Constants.TimesNewsWireApi.BaseUrl;
+                return new TimesNewsWireClient(_configuration);
+            }
+        }
+
+        public ITopStoriesClient TopStories
+        {
+            get
+            {
+                _configuration.BasePath = Constants.TopStoriesApi.BaseUrl;
+                return new TopStoriesClient(_configuration);
             }
         }
     }

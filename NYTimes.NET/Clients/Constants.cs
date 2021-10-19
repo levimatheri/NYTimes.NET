@@ -32,5 +32,15 @@
         {
             public const string BaseUrl = "https://api.nytimes.com/svc/semantic/v2/concept";
         }
+
+        public static class TimesNewsWireApi
+        {
+            public const string BaseUrl = "https://api.nytimes.com/svc/news/v3";
+        }
+
+        public static class TopStoriesApi
+        {
+            public const string BaseUrl = "https://api.nytimes.com/svc/topstories/v2";
+        }
     }
 }

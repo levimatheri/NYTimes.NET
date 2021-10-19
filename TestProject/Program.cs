@@ -13,8 +13,7 @@ namespace TestProject
             try
             {
                 var items = await new Api("")
-                    .Semantics.SearchConcept("evan", fields: "all");
-                //Console.WriteLine(items.ToJson());
+                    .TopStories.GetArticlesBySection("food");
                 foreach (var item in items)
                 {
                     Console.WriteLine(item.ToJson());
