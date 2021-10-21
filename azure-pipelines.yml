@@ -14,16 +14,19 @@ variables:
 
 steps:
 - task: DotNetCoreCLI@2
+  displayName: Restore packages
   inputs:
     command: 'restore'
     projects: 'NYTimes.NET.sln'
     feedsToUse: 'select'
 - task: DotNetCoreCLI@2
+  displayName: Build solution
   inputs:
     command: 'build'
     projects: 'NYTimes.NET.sln'
     arguments: '--configuration Release'
 - task: DotNetCoreCLI@2
+  displayName: Run unit tests
   inputs:
     command: 'test'
     projects: 'NYTimes.NET.Tests/NYTimes.NET.Tests.csproj'
