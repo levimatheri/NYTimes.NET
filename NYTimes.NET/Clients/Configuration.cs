@@ -103,7 +103,6 @@ namespace NYTimes.NET.Clients
         /// <summary>
         /// Initializes a new instance of the <see cref="Configuration" /> class
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "VirtualMemberCallInConstructor")]
         public Configuration(
             IDictionary<string, string> defaultHeaders,
             IDictionary<string, string> apiKey,
@@ -333,11 +332,7 @@ namespace NYTimes.NET.Clients
             get => _servers;
             set
             {
-                if (value == null)
-                {
-                    throw new InvalidOperationException("Servers may not be null.");
-                }
-                _servers = value;
+                _servers = value ?? throw new InvalidOperationException("Servers may not be null.");
             }
         }
 

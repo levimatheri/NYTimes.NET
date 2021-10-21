@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NYTimes.NET.Clients.TimesTags
+namespace NYTimes.NET.Clients.TimesNewsWire
 {
     public interface ITimesNewsWireClient
     {

@@ -10,6 +10,7 @@ namespace NYTimes.NET.Models
     [DataContract(Name = "results")]
     public class BestSellerOverview : IEquatable<BestSellerOverview>, IValidatableObject
     {
+        public BestSellerOverview(){}
         /// <summary>
         /// Initializes a new instance of the <see cref="BestSellerOverview" /> class.
         /// </summary>

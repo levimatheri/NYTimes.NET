@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ApiClientConfiguration = NYTimes.NET.Clients.Configuration;
 
-namespace NYTimes.NET.Clients.TimesTags
+namespace NYTimes.NET.Clients.TimesNewsWire
 {
     public class TimesNewsWireClient : ITimesNewsWireClient
     {
@@ -24,6 +24,7 @@ namespace NYTimes.NET.Clients.TimesTags
                 new ApiClientConfiguration { BasePath = GetBasePath() }
             );
 
+            this.RequestOptions = new RequestOptions(this.Configuration);
             this.AsynchronousClient = new ApiClient(this.Configuration.BasePath);
             ExceptionFactory = ApiClientConfiguration.DefaultExceptionFactory;
         }

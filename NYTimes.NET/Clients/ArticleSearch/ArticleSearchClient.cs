@@ -22,7 +22,8 @@ namespace NYTimes.NET.Clients.ArticleSearch
                 GlobalConfiguration.Instance,
                 new ApiClientConfiguration { BasePath = GetBasePath() }
             );
-            
+
+            this.RequestOptions = new RequestOptions(this.Configuration);
             this.AsynchronousClient = new ApiClient(this.Configuration.BasePath);
             ExceptionFactory = ApiClientConfiguration.DefaultExceptionFactory;
         }

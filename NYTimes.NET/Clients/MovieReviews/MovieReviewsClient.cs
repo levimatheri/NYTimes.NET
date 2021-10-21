@@ -24,6 +24,7 @@ namespace NYTimes.NET.Clients.MovieReviews
                 new ApiClientConfiguration { BasePath = GetBasePath() }
             );
 
+            this.RequestOptions = new RequestOptions(this.Configuration);
             this.AsynchronousClient = new ApiClient(this.Configuration.BasePath);
             ExceptionFactory = ApiClientConfiguration.DefaultExceptionFactory;
         }
@@ -107,7 +108,7 @@ namespace NYTimes.NET.Clients.MovieReviews
         /// <returns>Task of list of critics</returns>
         public async Task<IReadOnlyList<Critic>> GetMovieCritics(string reviewer, CancellationToken cancellationToken = default)
         {
-            if (reviewer == null)
+            if (string.IsNullOrWhiteSpace(reviewer))
                 throw new ApiException((int)HttpStatusCode.BadRequest, $"Missing required parameter {nameof(reviewer)} when calling {nameof(GetMovieCritics)}");
 
             var paramDictionary = new Dictionary<string, object>
@@ -141,7 +142,7 @@ namespace NYTimes.NET.Clients.MovieReviews
         /// <returns>Task of list of reviews</returns>
         public async Task<IReadOnlyList<MovieReview>> GetMovieReviews(string type, int? offset = default, string order = default, CancellationToken cancellationToken = default)
         {
-            if (type == null)
+            if (string.IsNullOrWhiteSpace(type))
                 throw new ApiException((int)HttpStatusCode.BadRequest, $"Missing required parameter {nameof(type)} when calling {nameof(GetMovieReviews)}");
 
 

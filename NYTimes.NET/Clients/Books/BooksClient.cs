@@ -26,7 +26,8 @@ namespace NYTimes.NET.Clients.Books
                 GlobalConfiguration.Instance,
                 new ApiClientConfiguration { BasePath = GetBasePath() }
             );
-            
+
+            this.RequestOptions = new RequestOptions(this.Configuration);
             this.AsynchronousClient = new ApiClient(this.Configuration.BasePath);
             ExceptionFactory = ApiClientConfiguration.DefaultExceptionFactory;
         }
@@ -118,7 +119,7 @@ namespace NYTimes.NET.Clients.Books
         public async Task<IReadOnlyList<Book>> GetBestSellersList(string list, string bestsellersDate = default, string publishedDate = default,
             int? offset = default, CancellationToken cancellationToken = default)
         {
-            if (list == null)
+            if (string.IsNullOrWhiteSpace(list))
                 throw new ApiException((int)HttpStatusCode.BadRequest, $"Missing required parameter 'list' when calling {nameof(GetBestSellersList)}");
             
             var paramDictionary = new Dictionary<string, object>
@@ -247,12 +248,10 @@ namespace NYTimes.NET.Clients.Books
         /// <returns>ApiResponse of InlineResponse2001</returns>
         public async Task<BestSellerOverview> GetBestSellersListByDate(string date, string list, int? offset = default, CancellationToken cancellationToken = default)
         {
-            // verify the required parameter 'date' is set
-            if (date == null)
+            if (string.IsNullOrWhiteSpace(date))
                 throw new ApiException((int)HttpStatusCode.BadRequest, $"Missing required parameter 'date' when calling {nameof(GetBestSellersListByDate)}");
 
-            // verify the required parameter 'list' is set
-            if (list == null)
+            if (string.IsNullOrWhiteSpace(list))
                 throw new ApiException((int)HttpStatusCode.BadRequest, $"Missing required parameter 'list' when calling {nameof(GetBestSellersListByDate)}");
 
             var paramDictionary = new Dictionary<string, object>

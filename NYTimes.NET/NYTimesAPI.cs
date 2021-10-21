@@ -5,16 +5,16 @@ using NYTimes.NET.Clients.Books;
 using NYTimes.NET.Clients.MostPopular;
 using NYTimes.NET.Clients.MovieReviews;
 using NYTimes.NET.Clients.Semantic;
-using NYTimes.NET.Clients.TimesTags;
+using NYTimes.NET.Clients.TimesNewsWire;
 using NYTimes.NET.Clients.TopStories;
 
 namespace NYTimes.NET
 {
-    public class Api
+    public class NYTimesApi
     {
         private readonly Configuration _configuration = new();
 
-        public Api(string apiKey)
+        public NYTimesApi(string apiKey)
         {
             _configuration.AddApiKey(Constants.ApiKeyPrefix, apiKey);
         }

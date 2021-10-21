@@ -26,6 +26,7 @@ namespace NYTimes.NET.Clients.Semantic
                 new ApiClientConfiguration { BasePath = GetBasePath() }
             );
 
+            this.RequestOptions = new RequestOptions(this.Configuration);
             this.AsynchronousClient = new ApiClient(this.Configuration.BasePath);
             ExceptionFactory = ApiClientConfiguration.DefaultExceptionFactory;
         }
@@ -120,13 +121,13 @@ namespace NYTimes.NET.Clients.Semantic
         /// <returns>Task of list of concepts</returns>
         public async Task<IReadOnlyList<Concept>> GetConcepts(string conceptType, string specificConcept, string query, string fields = default, CancellationToken cancellationToken = default)
         {
-            if (conceptType == null)
+            if (string.IsNullOrWhiteSpace(conceptType))
                 throw new ApiException((int)HttpStatusCode.BadRequest, $"Missing required parameter {nameof(conceptType)} when calling {nameof(GetConcepts)}");
 
-            if (specificConcept == null)
+            if (string.IsNullOrWhiteSpace(specificConcept))
                 throw new ApiException((int)HttpStatusCode.BadRequest, $"Missing required parameter {nameof(specificConcept)} when calling {nameof(GetConcepts)}");
 
-            if (query == null)
+            if (string.IsNullOrWhiteSpace(query))
                 throw new ApiException((int)HttpStatusCode.BadRequest, $"Missing required parameter {nameof(query)} when calling {nameof(GetConcepts)}");
 
             var pathParamDictionary = new Dictionary<string, object>
@@ -175,7 +176,7 @@ namespace NYTimes.NET.Clients.Semantic
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         public async Task<IReadOnlyList<Concept>> SearchConcept(string query, int? offset = default, string fields = default, CancellationToken cancellationToken = default)
         {
-            if (query == null)
+            if (string.IsNullOrWhiteSpace(query))
                 throw new ApiException((int)HttpStatusCode.BadRequest, $"Missing required parameter {nameof(query)} when calling {nameof(SearchConcept)}");
                        
             var queryParamDictionary = new Dictionary<string, object>
