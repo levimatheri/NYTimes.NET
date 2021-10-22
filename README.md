@@ -4,6 +4,9 @@
 A .NET Core SDK for NYTimes APIs.
 Model classes generated using [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator).
 
+# Installation
+* [Install from NuGet Gallery](https://www.nuget.org/packages/NYTimes.Net/)
+
 # Usage
 ```
 try
