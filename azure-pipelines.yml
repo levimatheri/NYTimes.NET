@@ -35,7 +35,7 @@ steps:
     testRunTitle: 'Run unit tests'
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)'
+    targetPath: '$(Build.SourcesDirectory)/NYTimes.NET/bin/$(buildConfiguration)'
     artifact: 'drop'
     publishLocation: 'pipeline'
 
