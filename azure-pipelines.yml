@@ -31,10 +31,11 @@ steps:
   inputs:
     command: 'test'
     projects: 'NYTimes.NET.Tests/NYTimes.NET.Tests.csproj'
+    arguments: '--configuration $(buildConfiguration)'
     testRunTitle: 'Run unit tests'
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.SourcesDirectory)/**'
+    targetPath: '$(Build.ArtifactStagingDirectory)'
     artifact: 'drop'
     publishLocation: 'pipeline'
 
