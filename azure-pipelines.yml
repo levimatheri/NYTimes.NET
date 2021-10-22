@@ -12,30 +12,36 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  projectName: 'NYTimes.NET'
 
 steps:
 - task: DotNetCoreCLI@2
   displayName: Restore packages
   inputs:
     command: 'restore'
-    projects: 'NYTimes.NET.sln'
+    projects: '$(projectName).sln'
     feedsToUse: 'select'
 - task: DotNetCoreCLI@2
   displayName: Build solution
   inputs:
     command: 'build'
-    projects: 'NYTimes.NET.sln'
+    projects: '$(projectName).sln'
     arguments: '--configuration $(buildConfiguration)'
 - task: DotNetCoreCLI@2
   displayName: Run unit tests
   inputs:
     command: 'test'
-    projects: 'NYTimes.NET.Tests/NYTimes.NET.Tests.csproj'
+    projects: '$(projectName).Tests/$(projectName).Tests.csproj'
     arguments: '--configuration $(buildConfiguration)'
     testRunTitle: 'Run unit tests'
-- task: PublishPipelineArtifact@1
+# - task: PublishPipelineArtifact@1
+#   inputs:
+#     targetPath: '$(Build.SourcesDirectory)/$(projectName)/bin/$(buildConfiguration)'
+#     artifact: 'drop'
+#     publishLocation: 'pipeline'
+- task: DotNetCoreCLI@2
   inputs:
-    targetPath: '$(Build.SourcesDirectory)/NYTimes.NET/bin/$(buildConfiguration)'
-    artifact: 'drop'
-    publishLocation: 'pipeline'
+    command: 'pack'
+    packagesToPack: '$(Build.SourcesDirectory)/$(projectName)/$(projectName).csproj'
+    versioningScheme: 'off'
 
