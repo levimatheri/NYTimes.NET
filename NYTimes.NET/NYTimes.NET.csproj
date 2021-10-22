@@ -4,7 +4,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <RunAnalyzersDuringLiveAnalysis>True</RunAnalyzersDuringLiveAnalysis>
         <RunAnalyzersDuringBuild>True</RunAnalyzersDuringBuild>
-		<PackageId>AppLogger</PackageId>
+		<PackageId>NYTimes.Net</PackageId>
 		<Version>1.0.0</Version>
 		<Authors>Levi Muriuki</Authors>
     </PropertyGroup>
