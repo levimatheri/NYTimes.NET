@@ -34,14 +34,15 @@ steps:
     projects: '$(projectName).Tests/$(projectName).Tests.csproj'
     arguments: '--configuration $(buildConfiguration)'
     testRunTitle: 'Run unit tests'
-# - task: PublishPipelineArtifact@1
-#   inputs:
-#     targetPath: '$(Build.SourcesDirectory)/$(projectName)/bin/$(buildConfiguration)'
-#     artifact: 'drop'
-#     publishLocation: 'pipeline'
 - task: DotNetCoreCLI@2
+  displayName: Generate NuGet Package
   inputs:
     command: 'pack'
     packagesToPack: '$(Build.SourcesDirectory)/$(projectName)/$(projectName).csproj'
     versioningScheme: 'off'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)'
+    artifact: 'drop'
+    publishLocation: 'pipeline'
 
