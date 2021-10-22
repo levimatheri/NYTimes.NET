@@ -31,4 +31,9 @@ steps:
     command: 'test'
     projects: 'NYTimes.NET.Tests/NYTimes.NET.Tests.csproj'
     testRunTitle: 'Run unit tests'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'drop'
+    publishLocation: 'pipeline'
 
