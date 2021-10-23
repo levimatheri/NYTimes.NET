@@ -2,7 +2,7 @@
 [![Build Status](https://levimatheri.visualstudio.com/NYTimes.NET/_apis/build/status/levimatheri.NYTimes.NET?branchName=main)](https://levimatheri.visualstudio.com/NYTimes.NET/_build/latest?definitionId=6&branchName=main)
 
 A .NET Core SDK for NYTimes APIs.
-Model classes generated using [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator).
+Model and API configuration classes generated using [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator).
 
 # Installation
 * [Install from NuGet Gallery](https://www.nuget.org/packages/NYTimes.Net/)
