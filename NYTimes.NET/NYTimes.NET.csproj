@@ -11,7 +11,7 @@
 		<RepositoryUrl>https://github.com/levimatheri/NYTimes.NET</RepositoryUrl>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageTags>NYTimes</PackageTags>
-		<PackageLicenseExpression>https://spdx.org/licenses/BSD-3-Clause.html</PackageLicenseExpression>
+		<PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>
