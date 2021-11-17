@@ -42,5 +42,18 @@
         {
             public const string BaseUrl = "https://api.nytimes.com/svc/topstories/v2";
         }
+
+        public static class RSSFeedsApi
+        {
+            public const string BaseUrl = "https://api.nytimes.com/services/xml/rss/nyt";
+        }
+
+        public static class XmlNamespaces
+        {
+            public const string Atom = "http://www.w3.org/2005/Atom";
+            public const string Dc = "http://purl.org/dc/elements/1.1/";
+            public const string Media = "http://search.yahoo.com/mrss/";
+            public const string Nyt = "http://www.nytimes.com/namespaces/rss/2.0";
+        }
     }
 }

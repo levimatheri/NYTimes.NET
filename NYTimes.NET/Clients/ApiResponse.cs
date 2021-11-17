@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Net;
 
@@ -44,7 +45,7 @@ namespace NYTimes.NET.Clients
         /// <summary>
         /// The raw content of this response
         /// </summary>
-        string RawContent { get; }
+        string RawContent { get; }  
     }
 
     /// <summary>
@@ -100,6 +101,8 @@ namespace NYTimes.NET.Clients
         /// </summary>
         public string RawContent { get; }
 
+        IRestResponse RestSharpResponse { get; set; }
+
         #endregion Properties
 
         #region Constructors
@@ -111,12 +114,13 @@ namespace NYTimes.NET.Clients
         /// <param name="headers">HTTP headers.</param>
         /// <param name="data">Data (parsed HTTP body)</param>
         /// <param name="rawContent">Raw content.</param>
-        public ApiResponse(HttpStatusCode statusCode, Multimap<string, string> headers, T data, string rawContent = null)
+        public ApiResponse(HttpStatusCode statusCode, Multimap<string, string> headers, T data, string rawContent = null, IRestResponse restSharpResponse = null)
         {
             StatusCode = statusCode;
             Headers = headers;
             Data = data;
             RawContent = rawContent;
+            RestSharpResponse = restSharpResponse;
         }
 
         /// <summary>
@@ -125,11 +129,16 @@ namespace NYTimes.NET.Clients
         /// <param name="statusCode">HTTP status code.</param>
         /// <param name="data">Data (parsed HTTP body)</param>
         /// <param name="rawContent">Raw content.</param>
-        public ApiResponse(HttpStatusCode statusCode, T data, string rawContent = null) 
-            : this(statusCode, null, data, rawContent)
+        public ApiResponse(HttpStatusCode statusCode, T data, string rawContent = null, IRestResponse restSharpResponse = null) 
+            : this(statusCode, null, data, rawContent, restSharpResponse)
         {
         }
 
         #endregion Constructors
+
+        public IRestResponse GetRestSharpResponse()
+        {
+            return RestSharpResponse;
+        }
     }
 }

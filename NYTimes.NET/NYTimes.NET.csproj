@@ -1,19 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <RunAnalyzersDuringLiveAnalysis>True</RunAnalyzersDuringLiveAnalysis>
         <RunAnalyzersDuringBuild>True</RunAnalyzersDuringBuild>
 		<PackageId>NYTimes.Net</PackageId>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 		<Authors>Levi Muriuki</Authors>
+		<Description>A .NET Core SDK package for interfacing with NYTimes APIs.</Description>
+		<RepositoryUrl>https://github.com/levimatheri/NYTimes.NET</RepositoryUrl>
+		<PackageLicenseFile>C:\Users\levim\source\repos\NYTimes.NET\LICENSE</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<PackageTags>NYTimes</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
       <PackageReference Include="Polly" Version="7.2.2" />
       <PackageReference Include="RestSharp" Version="106.12.0" />
-      <PackageReference Include="System.ServiceModel.Primitives" Version="4.8.1" />
     </ItemGroup>
 
 </Project>

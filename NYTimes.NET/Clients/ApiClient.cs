@@ -239,7 +239,7 @@ namespace NYTimes.NET.Clients
             var result = response.Data;
             var rawContent = response.Content;
 
-            var transformed = new ApiResponse<T>(response.StatusCode, new Multimap<string, string>(), result, rawContent)
+            var transformed = new ApiResponse<T>(response.StatusCode, new Multimap<string, string>(), result, rawContent, response)
             {
                 ErrorText = response.ErrorMessage,
                 Cookies = new List<Cookie>()
