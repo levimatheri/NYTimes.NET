@@ -9,9 +9,9 @@
 		<Authors>Levi Muriuki</Authors>
 		<Description>A .NET Core SDK package for interfacing with NYTimes APIs.</Description>
 		<RepositoryUrl>https://github.com/levimatheri/NYTimes.NET</RepositoryUrl>
-		<PackageLicenseFile>C:\Users\levim\source\repos\NYTimes.NET\LICENSE</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageTags>NYTimes</PackageTags>
+		<PackageLicenseExpression>https://spdx.org/licenses/BSD-3-Clause.html</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>
