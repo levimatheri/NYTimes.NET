@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
 
 namespace NYTimes.NET.Models
 {
@@ -12,7 +8,7 @@ namespace NYTimes.NET.Models
     /// BestSellerListName
     /// </summary>
     [DataContract(Name = "results")]
-    public class BestSellerListName : IEquatable<BestSellerListName>, IValidatableObject
+    public class BestSellerListName : ModelBase
     {
         /// <summary>
         /// Defines Updated
@@ -88,118 +84,5 @@ namespace NYTimes.NET.Models
         /// </summary>
         [DataMember(Name = "newest_published_date", EmitDefaultValue = false)]
         public string NewestPublishedDate { get; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.Append("class BestSellerListName {\n");
-            sb.Append("  ListName: ").Append(ListName).Append('\n');
-            sb.Append("  DisplayName: ").Append(DisplayName).Append('\n');
-            sb.Append("  ListNameEncoded: ").Append(ListNameEncoded).Append('\n');
-            sb.Append("  OldestPublishedDate: ").Append(OldestPublishedDate).Append('\n');
-            sb.Append("  NewestPublishedDate: ").Append(NewestPublishedDate).Append('\n');
-            sb.Append("  Updated: ").Append(Updated).Append('\n');
-            sb.Append("}\n");
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-
-        /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as BestSellerListName);
-        }
-
-        /// <summary>
-        /// Returns true if BestSellerListName instances are equal
-        /// </summary>
-        /// <param name="input">Instance of BestSellerListName to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(BestSellerListName input)
-        {
-            if (input == null)
-                return false;
-
-            return 
-                (
-                    this.ListName == input.ListName ||
-                    (this.ListName != null &&
-                    this.ListName.Equals(input.ListName))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
-                (
-                    this.ListNameEncoded == input.ListNameEncoded ||
-                    (this.ListNameEncoded != null &&
-                    this.ListNameEncoded.Equals(input.ListNameEncoded))
-                ) && 
-                (
-                    this.OldestPublishedDate == input.OldestPublishedDate ||
-                    (this.OldestPublishedDate != null &&
-                    this.OldestPublishedDate.Equals(input.OldestPublishedDate))
-                ) && 
-                (
-                    this.NewestPublishedDate == input.NewestPublishedDate ||
-                    (this.NewestPublishedDate != null &&
-                    this.NewestPublishedDate.Equals(input.NewestPublishedDate))
-                ) && 
-                (
-                    this.Updated == input.Updated ||
-                    this.Updated.Equals(input.Updated)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                var hashCode = 41;
-                if (this.ListName != null)
-                    hashCode = hashCode * 59 + this.ListName.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
-                if (this.ListNameEncoded != null)
-                    hashCode = hashCode * 59 + this.ListNameEncoded.GetHashCode();
-                if (this.OldestPublishedDate != null)
-                    hashCode = hashCode * 59 + this.OldestPublishedDate.GetHashCode();
-                if (this.NewestPublishedDate != null)
-                    hashCode = hashCode * 59 + this.NewestPublishedDate.GetHashCode();
-                hashCode = hashCode * 59 + this.Updated.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            yield break;
-        }
     }
 }

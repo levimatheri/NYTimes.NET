@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
 namespace NYTimes.NET.Models
 {
     /// <summary>
     /// BookDetails
     /// </summary>
-    public class BookDetail : IEquatable<BookDetail>, IValidatableObject
+    public class BookDetail : ModelBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BookDetail" /> class.
@@ -99,150 +95,5 @@ namespace NYTimes.NET.Models
         /// </summary>
         [DataMember(Name = "primary_isbn10", EmitDefaultValue = false)]
         public string PrimaryIsbn10 { get; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.Append("class BookDetails {\n");
-            sb.Append("  Title: ").Append(Title).Append('\n');
-            sb.Append("  Description: ").Append(Description).Append('\n');
-            sb.Append("  Contributor: ").Append(Contributor).Append('\n');
-            sb.Append("  Author: ").Append(Author).Append('\n');
-            sb.Append("  ContributorNote: ").Append(ContributorNote).Append('\n');
-            sb.Append("  Price: ").Append(Price).Append('\n');
-            sb.Append("  AgeGroup: ").Append(AgeGroup).Append('\n');
-            sb.Append("  Publisher: ").Append(Publisher).Append('\n');
-            sb.Append("  PrimaryIsbn13: ").Append(PrimaryIsbn13).Append('\n');
-            sb.Append("  PrimaryIsbn10: ").Append(PrimaryIsbn10).Append('\n');
-            sb.Append("}\n");
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-        }
-
-        /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as BookDetail);
-        }
-
-        /// <summary>
-        /// Returns true if BookDetails instances are equal
-        /// </summary>
-        /// <param name="input">Instance of BookDetails to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(BookDetail input)
-        {
-            if (input == null)
-                return false;
-
-            return 
-                (
-                    this.Title == input.Title ||
-                    (this.Title != null &&
-                    this.Title.Equals(input.Title))
-                ) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.Contributor == input.Contributor ||
-                    (this.Contributor != null &&
-                    this.Contributor.Equals(input.Contributor))
-                ) && 
-                (
-                    this.Author == input.Author ||
-                    (this.Author != null &&
-                    this.Author.Equals(input.Author))
-                ) && 
-                (
-                    this.ContributorNote == input.ContributorNote ||
-                    (this.ContributorNote != null &&
-                    this.ContributorNote.Equals(input.ContributorNote))
-                ) && 
-                (
-                    this.Price == input.Price ||
-                    this.Price.Equals(input.Price)
-                ) && 
-                (
-                    this.AgeGroup == input.AgeGroup ||
-                    (this.AgeGroup != null &&
-                    this.AgeGroup.Equals(input.AgeGroup))
-                ) && 
-                (
-                    this.Publisher == input.Publisher ||
-                    (this.Publisher != null &&
-                    this.Publisher.Equals(input.Publisher))
-                ) && 
-                (
-                    this.PrimaryIsbn13 == input.PrimaryIsbn13 ||
-                    (this.PrimaryIsbn13 != null &&
-                    this.PrimaryIsbn13.Equals(input.PrimaryIsbn13))
-                ) && 
-                (
-                    this.PrimaryIsbn10 == input.PrimaryIsbn10 ||
-                    (this.PrimaryIsbn10 != null &&
-                    this.PrimaryIsbn10.Equals(input.PrimaryIsbn10))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                var hashCode = 41;
-                if (this.Title != null)
-                    hashCode = hashCode * 59 + this.Title.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Contributor != null)
-                    hashCode = hashCode * 59 + this.Contributor.GetHashCode();
-                if (this.Author != null)
-                    hashCode = hashCode * 59 + this.Author.GetHashCode();
-                if (this.ContributorNote != null)
-                    hashCode = hashCode * 59 + this.ContributorNote.GetHashCode();
-                hashCode = hashCode * 59 + this.Price.GetHashCode();
-                if (this.AgeGroup != null)
-                    hashCode = hashCode * 59 + this.AgeGroup.GetHashCode();
-                if (this.Publisher != null)
-                    hashCode = hashCode * 59 + this.Publisher.GetHashCode();
-                if (this.PrimaryIsbn13 != null)
-                    hashCode = hashCode * 59 + this.PrimaryIsbn13.GetHashCode();
-                if (this.PrimaryIsbn10 != null)
-                    hashCode = hashCode * 59 + this.PrimaryIsbn10.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            yield break;
-        }
     }
 }
