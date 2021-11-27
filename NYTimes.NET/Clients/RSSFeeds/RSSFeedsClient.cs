@@ -142,7 +142,7 @@ namespace NYTimes.NET.Clients.RSSFeeds
                 if (_exception != null) throw _exception;
             }
 
-            return result.Channel;
+            return result?.Channel;
         }
     }
 }

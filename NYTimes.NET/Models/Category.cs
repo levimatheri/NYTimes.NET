@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace NYTimes.NET.Models
 {
     [DataContract(Name = "category")]
-    public class Category
+    public class Category : ModelBase
     {
         [DataMember, XmlText]
         public string Value { get; set; }
