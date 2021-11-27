@@ -27,7 +27,7 @@ namespace NYTimes.NET.Models
         /// </summary>
         public string Atomlink
         {
-            get => this.AtomLinkWrapperObj.AtomLinkHrefAttr;
+            get => this.AtomLinkWrapperObj?.AtomLinkHrefAttr;
         }
 
         /// <summary>

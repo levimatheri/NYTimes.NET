@@ -49,7 +49,7 @@ namespace NYTimes.NET.Models
 
         public string MediaContent
         {
-            get => this.MediaContentWrapperObj.MediaContentUrl;
+            get => this.MediaContentWrapperObj?.MediaContentUrl;
         }
 
         /// <summary>
