@@ -16,7 +16,7 @@
 
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-      <PackageReference Include="Polly" Version="7.2.2" />
+      <PackageReference Include="Polly" Version="7.2.3" />
       <PackageReference Include="RestSharp" Version="106.12.0" />
     </ItemGroup>
 
