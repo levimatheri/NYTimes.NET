@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5.0;net6.0;net.7.0</TargetFramework>
+        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
         <RunAnalyzersDuringLiveAnalysis>True</RunAnalyzersDuringLiveAnalysis>
         <RunAnalyzersDuringBuild>True</RunAnalyzersDuringBuild>
 		<PackageId>NYTimes.Net</PackageId>
-		<Version>1.0.1</Version>
+		<Version>1.0.2</Version>
 		<Authors>Levi Muriuki</Authors>
 		<Description>A .NET Core SDK package for interfacing with NYTimes APIs.</Description>
 		<RepositoryUrl>https://github.com/levimatheri/NYTimes.NET</RepositoryUrl>
